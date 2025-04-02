@@ -7,7 +7,7 @@ output="$ROOT_DIR"
 
 (
   cd ../arXiv-2501.14787v1 || exit 1
-  pandoc main.tex --wrap=preserve --standalone -Mliquid=false -Mlang=en-US --embed-resources=true -t markdown -o "$temp/index.md" --extract-media="$temp"
+  pandoc main.tex --wrap=preserve --standalone -Mrender_with_liquid=false -Mlang=en-US --embed-resources=true -t markdown -o "$temp/index.md" --extract-media="$temp"
 ) || exit 1
 
 convert_asset() {
