@@ -2,6 +2,7 @@
 layout: default
 title: Главная
 markdown: kramdown
+math: true
 ---
 
 # Добро пожаловать !!!!!!!!!!!!!!!

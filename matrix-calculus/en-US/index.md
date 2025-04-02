@@ -5,6 +5,7 @@ author:
   Notes by Paige Bright, Alan Edelman, and Steven G. Johnson
 date: Based on MIT course 18.S096 (now 18.063) in IAP 2023
 lang: en-US
+math: true
 title: |
   Matrix Calculus\
   (for Machine Learning and Beyond)
