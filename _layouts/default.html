@@ -21,13 +21,13 @@
 
   <script>
     MathJax = {
-        tex: {
-            inlineMath: [['$', '$']]
-        }
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
     };
   </script>
-<!--  <script async type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>-->
-  <script async type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <script>
     // When the page loads, find all <a> tags whose href starts with http:// or https://
@@ -60,10 +60,12 @@
 <main id="content" class="main-content" role="main">
   {{ content }}
   <footer class="site-footer">
-    <span class="site-footer-owner">View <a href="{{ site.github.repository_url }}">this website</a> on GitHub.</span>
+    <span class="site-footer-owner">
+      View <a href="{{ site.github.repository_url }}">this website</a> on GitHub.
+      &middot;
+      Suggest an <a href="{{ site.github.repository_url }}/edit/main/{{ page.path }}">edit to this page</a>.
+    </span>
   </footer>
-  &middot;
-  <a href="{{ site.github.repository_url }}/edit/main/{{ page.path }}">Edit this page on GitHub.</a>
 </main>
 </body>
 </html>
