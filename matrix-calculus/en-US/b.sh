@@ -7,7 +7,12 @@ output="$ROOT_DIR"
 
 (
   cd ../arXiv-2501.14787v1 || exit 1
-  pandoc main.tex --wrap=preserve --standalone -Mrender_with_liquid=false -Mlang=en-US --embed-resources=true -t markdown -o "$temp/index.md" --extract-media="$temp"
+  pandoc main.tex --wrap=preserve --standalone -Mlang=en-US --embed-resources=true -t markdown -o "$temp/index.md" --extract-media="$temp"
+  # Add {% raw %} after frontmatter and {% endraw %} at the end
+  #perl -i -pe 'if(/^---$/){ $count++; if($count==2){ print "{% raw %}\n" } }' "$temp/index.md"
+   perl -i -pe 'if (/^---$/) { $count++; $_ .= "\n{% raw %}" if $count==2 }' "$temp/index.md"
+  #sed -i -e '1s/^/{% raw %}\n/' "$temp/index.md"
+  sed -i -e '$s/$/\n{% endraw %}/' "$temp/index.md"
 ) || exit 1
 
 convert_asset() {

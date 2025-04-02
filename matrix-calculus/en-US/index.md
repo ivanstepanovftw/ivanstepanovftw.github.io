@@ -5,12 +5,12 @@ author:
   Notes by Paige Bright, Alan Edelman, and Steven G. Johnson
 date: Based on MIT course 18.S096 (now 18.063) in IAP 2023
 lang: en-US
-render_with_liquid: false
 title: |
   Matrix Calculus\
   (for Machine Learning and Beyond)
 ---
 
+{% raw %}
 # Introduction {#introduction .unnumbered}
 
 These notes are based on the class as it was run for the second time in January 2023, taught by Professors Alan Edelman and Steven G. Johnson at MIT. The previous version of this course, run in January 2022, can be found [on OCW here](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2022/).
@@ -3542,3 +3542,4 @@ There are many topics that we did not have time to cover, even in 16 hours of le
 [^18]: Much of machine learning uses only variations on gradient descent, without incorporating Hessian information except implicitly via "momentum" terms. Partly this can be explained by the fact that optimization problems in ML are typically solved only to low accuracy, often have nonsmooth/stochastic aspects, rarely involve nonlinear constraints, and are often very high-dimensional. This is only a small corner of the wider universe of computational optimization!
 
 [^19]: The term "programming" in optimization theory does not refer to software engineering, but is rather an anachronistic term for optimization problems. For example, "linear programming" (LP) refers to optimizing affine objectives and affine constraints, while "quadratic programming" (QP) refers to optimizing convex quadratic objectives with affine constraints.
+{% endraw %}
