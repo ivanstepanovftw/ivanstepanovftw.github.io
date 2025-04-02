@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{dBabylonian}\PYG{p}{(}\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{N}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{)}
+\PYG{+w}{           }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{+}\PYG{n}{x}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}
+\PYG{+w}{           }\PYG{n}{t′}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{l+m+mi}{2}
+\PYG{+w}{           }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}
+\PYG{+w}{               }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{t}\PYG{o}{+}\PYG{n}{x}\PYG{o}{/}\PYG{n}{t}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}
+\PYG{+w}{               }\PYG{n}{t′}\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{t′}\PYG{o}{+}\PYG{p}{(}\PYG{n}{t}\PYG{o}{\PYGZhy{}}\PYG{n}{x}\PYG{o}{*}\PYG{n}{t′}\PYG{p}{)}\PYG{o}{/}\PYG{n}{t}\PYG{o}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}
+\PYG{+w}{           }\PYG{k}{end}
+\PYG{+w}{           }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{t′}
+\PYG{+w}{       }\PYG{k}{end}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{dBabylonian}\PYG{p}{(}\PYG{l+m+mi}{49}\PYG{p}{)}
+\PYG{g+go}{0.07142857142857142}
+\end{Verbatim}

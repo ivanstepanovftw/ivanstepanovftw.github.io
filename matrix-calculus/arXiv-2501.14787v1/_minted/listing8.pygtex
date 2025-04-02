@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{ForwardDiff}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{ForwardDiff}\PYG{o}{.}\PYG{n}{derivative}\PYG{p}{(}\PYG{n}{Babylonian}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{49}\PYG{p}{)}
+\PYG{g+go}{0.07142857142857142}
+\end{Verbatim}

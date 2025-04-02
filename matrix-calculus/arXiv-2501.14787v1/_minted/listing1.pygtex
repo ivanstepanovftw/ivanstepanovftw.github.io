@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{Babylonian}\PYG{p}{(}\PYG{n}{x}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{N}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{10}\PYG{p}{)}
+\PYG{+w}{           }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{+}\PYG{n}{x}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{+w}{   }\PYG{c}{\PYGZsh{} one step from t=1}
+\PYG{+w}{           }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{o}{:}\PYG{n}{N}\PYG{+w}{   }\PYG{c}{\PYGZsh{} remaining N\PYGZhy{}1 steps}
+\PYG{+w}{               }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{t}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{/}\PYG{n}{t}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{/}\PYG{+w}{ }\PYG{l+m+mi}{2}
+\PYG{+w}{           }\PYG{k}{end}
+\PYG{+w}{           }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{t}
+\PYG{+w}{       }\PYG{k}{end}
+\end{Verbatim}

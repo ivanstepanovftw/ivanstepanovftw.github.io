@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{ForwardDiff}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{Zygote}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LinearAlgebra}
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{/}\PYG{n}{norm}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{(}\PYG{n}{z}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sum}\PYG{p}{(}\PYG{n}{z}\PYG{p}{)}\PYG{o}{\PYGZca{}}\PYG{l+m+mi}{3}
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{(}\PYG{n}{Zygote}\PYG{o}{.}\PYG{n}{gradient}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{)[}\PYG{l+m+mi}{1}\PYG{p}{])}
+\end{Verbatim}

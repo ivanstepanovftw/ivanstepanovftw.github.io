@@ -1,0 +1,167 @@
+Matrix calculus
+requires us  to generalize concepts of derivative and gradient further, to functions whose inputs and/or outputs are not simply scalars or column vectors.  To achieve this, we extend the notion of the ordinary vector \textbf{dot product} and
+ordinary Euclidean vector ``length'' to
+general \textbf{inner products} and \textbf{norms} on 
+\textbf{vector spaces}.
+Our first example will consider familiar matrices
+from this point of view.
+
+Recall from linear algebra that we can call any set $V$ a ``vector space'' if its elements can be added/subtracted $x \pm y$ and multiplied by scalars $\alpha x$ (subject to some basic arithmetic axioms, e.g.~the  distributive law).  For example, the set of $m \times n$ matrices themselves form a vector space, or even the set of continuous functions $u(x)$ (mapping $\mathbb{R} \to \mathbb{R}$)---the key fact is that we can add/subtract/scale them and get elements of the same set.  It turns out to be extraordinarily useful to extend differentiation to such spaces, e.g.~for functions that map matrices to matrices or functions to numbers.  Doing so crucially relies on our input/output vector spaces $V$ having a \textbf{norm} and, ideally, an \textbf{inner product}.
+
+\subsection{A Simple Matrix Dot Product and Norm}
+
+
+
+% \subsection{Gradients, Inner products, and Hilbert spaces}
+
+Recall that for \textit{scalar-valued} functions $f(x) \in \R$ with \textit{vector inputs} $x\in \R^n$ (i.e. $n$-component ``column vectors") we have that 
+    \[
+    \d f = f(x + \d x) - f(x) = f'(x) [\d x] \in \R.
+    \]
+    Therefore, $f'(x)$ is a linear operator taking in the vector $\d x$ in and giving a scalar value out. Another way to view this is that $f'(x)$ is the row vector\footnote{The concept of a ``row vector'' can be formalized as something called a ``covector,'' a ``dual vector,'' or an element of a ``\href{https://en.wikipedia.org/wiki/Dual_space}{dual space},'' not to be confused with the \emph{dual numbers} used in automatic differentiation (Sec.~\ref{sec:AD}).}  $(\nabla f)^T$. Under this viewpoint, it follows that $\d f$ is the dot product (or ``inner product''):
+    \[
+    \d f = \nabla f \cdot \d x
+    \]
+
+We can generalize this to any vector space $V$ with inner products! Given $x\in V$, and a scalar-valued function $f$, we obtain the linear operator $f'(x) [\d x] \in \R$, called a ``linear form.'' In order to define the gradient $\nabla f$, we need an inner product for $V$, the vector-space generalization of the familiar dot product!
+
+Given $x,y \in V$, the inner product $\langle x, y \rangle$  is a map ($\cdot$) such that $\langle x, y \rangle \in \R$. This is also commonly denoted $x \cdot y$ or $\langle x \mid y \rangle$. More technically, an inner product is a map  that is 
+\begin{enumerate}
+    \item \textbf{Symmetric}: i.e. $\langle x, y \rangle = \langle y, x \rangle$ (or conjugate-symmetric,\footnote{Some authors distinguish the ``dot product'' from an ``inner product'' for complex vector spaces, saying that a dot product has no complex conjugation $x \cdot y = y \cdot x$ (in which case $x \cdot x$ need not be real and does not equal $\Vert x \Vert^2$), whereas the inner product must be conjugate-symmetric, via $\langle x, y \rangle = \bar{x} \cdot y$.  Another source of confusion for complex vector spaces is that some fields of mathematics define $\langle x, y \rangle = x \cdot \bar{y}$, i.e.~they conjugate the \emph{right} argument instead of the left (so that it is linear in the left argument and conjugate-linear in the right argument).  Aren't you glad we're sticking with real numbers?} $\langle x, y \rangle = \overline{\langle y, x \rangle}$, if we were using complex numbers), 
+    \item \textbf{Linear}: i.e. $\langle x, \alpha y + \beta z\rangle = \alpha \langle x, y \rangle + \beta \langle x, z \rangle$, and 
+    \item \textbf{Non-negative}: i.e. $\langle x, x \rangle := \lVert x \rVert^2 \geq 0$, and $=0$ if and only if $x = 0$.
+\end{enumerate}
+Note that the combination of the first two properties means that it must also be linear in the left vector (or conjugate-linear, if we were using complex numbers).  Another useful consequence of these three properties, which is a bit trickier to derive, is the \emph{Cauchy--Schwarz inequality} $|\langle x, y \rangle| \le \Vert x \Vert \, \Vert y \Vert$.
+
+\begin{definition}[Hilbert Space]
+A (complete) vector space with an inner product is called a \textit{Hilbert space}.  (The technical requirement of ``completeness'' essentially means that you can take limits in the space, and is important for rigorous proofs.\footnote{Completeness means that any Cauchy sequence of points in the vector space---any sequence of points that gets closer and closer together---has a limit lying within the vector space.  This criterion usually holds in practice for vector spaces over real or complex scalars, but can get trickier when talking about vector spaces of functions, since e.g.~the limit of a sequence of continuous functions can be a discontinuous function.})
+\end{definition}
+
+Once we have a Hilbert space, we can define the gradient for scalar-valued functions. Given $x\in V$ a Hilbert space, and $f(x)$ scalar, then we have the linear form $f'(x) [\d x] \in \R$. Then, under these assumptions, there is a theorem known as the ``Riesz representation theorem'' stating that \emph{any} linear form (including $f'$) must be an inner product with \emph{something}: 
+\[
+f'(x) [\d x] = \big\langle \underbrace{\text{(some vector)}}_{\text{gradient } \nabla f\bigr|_x} , \d x \big\rangle = \d f.
+\]
+That is, the gradient $\nabla f$ is \emph{defined} as the thing you take the inner product of $\d x$ with to get $\d f$.
+Note that $\nabla f$ always has the ``same shape'' as $x$.
+
+The first few examples we look at involve the usual Hilbert space $V = \R^n$ with different inner products.
+
+\begin{example}
+    Given $V = \R^n$ with $n$-column vectors, we have the familiar Euclidean dot product $\langle x, y \rangle = x^T y$. This leads to the usual $\nabla f$.
+\end{example}
+
+\begin{example}
+    We can have different inner products on $\R^n$. For instance, 
+    \[
+    \langle x, y\rangle_W = w_1 x_1 y_1 + w_2 x_2 y_2 + \dots w_n x_n y_n = x^T \underbrace{\begin{pmatrix}
+        w_1 & & \\
+         & \ddots & \\
+         & & w_n
+    \end{pmatrix}}_{W} y
+    \]
+    for weights $w_1,\dots, w_n >0$. 
+    
+    More generally we can define a weighted dot product $\langle x, y\rangle_W= x^T W y$ for any symmetric-positive-definite matrix $W$ ($W = W^T$ and $W$ is positive definite, which is sufficient for this to be a valid inner product).
+
+    If we change the definition of the inner product, then we change the definition of the gradient!  For example, with $f(x) = x^T A x$ we previously found that $\d f = x^T (A + A^T) \d x$.  With the ordinary Euclidean inner product, this gave a gradient $\nabla f = (A+A^T)x$.  However, if we use the weighted inner product $x^T W y$, then we would obtain a different ``gradient'' $\nabla^{(W)} f = W^{-1} (A+A^T)x$ so that $\d f = \langle \nabla^{(W)}  f , \d x \rangle$.
+    
+    In these notes, we will employ the Euclidean inner product for $x \in \mathbb{R}^n$, and hence the usual $\nabla f$, unless noted otherwise.  However, weighted inner products are useful in lots of cases, especially when the components of $x$ have different scales/units.
+\end{example}
+
+We can also consider the space of $m\times n$ matrices $V = \R^{m \times n}$. There, is of course, a vector-space isomorphism from $V \ni A \to \mathrm{vec}(A) \in \R^{mn}$. Thus, in this space we have the analogue of the familiar (``Frobenius") Euclidean inner product, which is convenient to rewrite in terms of matrix operations via the trace: 
+\begin{definition}[Frobenius inner product]
+The \textbf{Frobenius inner product} of two $m \times n$ matrices $A$ and $B$ is:
+\[
+\langle A, B \rangle_F = \sum_{ij} A_{ij} B_{ij} = \mathrm{vec}(A)^T \mathrm{vec}(B) = \tr(A^T B) \, .
+\]
+Given this inner product, we also have the corresponding \textbf{Frobenius norm}: $$\lVert A \rVert_F = \sqrt{\langle A,A \rangle_F} = \sqrt{\tr(A^TA)} = \lVert \mathrm{vec} A\rVert = \sqrt{\sum_{i,j} |A_{ij}|^2} \, .$$ 
+Using this, we can now define the gradient of scalar functions with \textit{matrix inputs}!  This will be our default matrix inner product (hence defining our default matrix gradient) in these notes (sometimes dropping the $F$ subscript).
+\end{definition}
+
+\begin{example}
+    Consider the function 
+    \[
+    f(A) = \lVert A \rVert_F = \sqrt{\tr(A^T A)}.
+    \] What is $\d f$?
+\end{example}
+Firstly, by the familiar scalar-differentiation chain and power rules we have that 
+\[
+\d f = \frac{1}{2 \sqrt{\tr(A^T A)}} \d (\tr A^T A).
+\]
+Then, note that (by linearity of the trace)
+\[
+\d( \tr B) = \tr(B+\d B) - \tr(B) = \tr(B) + \tr(\d B) - \tr(B) = \tr(\d B).
+\]
+Hence, 
+\begin{align*}
+    \d f &= \frac{1}{2\lVert A\rVert_F} \tr(\d (A^T A)) \\
+    &= \frac{1}{2\lVert A\rVert_F} \tr( \d A^T\, A + A^T\, \d A) \\
+    &= \frac{1}{2 \lVert A\rVert_F} (\tr(\d A^T\, A) + \tr(A^T\, \d A)) \\
+    &= \frac{1}{\lVert A\rVert_F} \tr(A^T \, \d A) = \big\langle \frac{A}{\lVert A\rVert_F} , \d A \big\rangle.
+\end{align*}
+Here, we used the fact that $\tr B = \tr B^T$, and in the last step we connected $\d f$ with a Frobenius inner product. In other words, 
+\[
+\nabla f = \nabla \lVert A \rVert_F = \frac{A}{\lVert A \rVert_F}.
+\]
+Note that one obtains exactly the same result for column vectors~$x$, i.e.~$\nabla \Vert x\Vert = x/\Vert x \Vert$ (and in fact this is equivalent via $x = \vecm A$).
+
+Let's consider another simple example:
+
+\begin{example}
+Fix some constant $x \in \R^m$, $y\in \R^n$, and consider the function $f:\R^{m\times n} \to \R$ given by
+\[
+f(A) = x^T A y.
+\]
+What is $\nabla f$?
+\end{example}
+We have that 
+\begin{align*}
+    \d f &= x^T \,\d A \,y \\
+    &= \tr( x^T \,\d A\, y) \\
+    &= \tr(y x^T \, \d A) \\
+    &= \big\langle \underbrace{x y^T}_{\nabla f} , \, \d A \big\rangle.
+\end{align*}
+
+More generally, for any scalar-valued function $f(A)$, from the definition of Frobenius inner product it follows that:
+$$
+\d f = f(A+\d A)-f(A) = \langle \nabla f , \, \d A \rangle = \sum_{i,j} (\nabla f)_{i,j} \, \d A_{i,j} \, ,
+$$
+and hence the components of the gradient are exactly the elementwise derivatives
+$$
+(\nabla f)_{i,j} = \frac{\partial f}{\partial A_{i,j}} \, ,
+$$
+similar to the component-wise definition of the gradient vector from multivariable calculus!  But for non-trivial matrix-input functions $f(A)$ it can be extremely awkward to take the derivative with respect to each entry of $A$ individually.
+Using the ``holistic'' matrix inner-product definition, we will soon be able to compute even more complicated matrix-valued gradients, including  $\nabla (\det A)$!
+
+\subsection{Derivatives, Norms, and Banach spaces}
+\label{sec:banach}
+
+We have been using the term ``norm'' throughout this class, but what technically is a norm?  Of course, there are familiar examples such as the Euclidean (``$\ell^2$'') norm $\Vert x \Vert = \sqrt{\sum_k x_k^2}$ for $x\in \mathbb{R}^n$, but it is useful to consider how this concept generalizes to other vector spaces.   It turns out, in fact, that norms are crucial to the definition of a derivative!
+
+Given a vector space $V$, a norm $\lVert \cdot \rVert$ on $V$ is a map $\lVert \cdot \rVert: V\to \R$ satisfying the following three properties:
+\begin{enumerate}
+    \item \textbf{Non-negative}: i.e. $\lVert v \rVert \geq 0$ and $\lVert v \rVert = 0 \iff v = 0$,
+    \item \textbf{Homogeneity}: $\lVert \alpha v \rVert = |\alpha |\lVert v \rVert$ for any $\alpha \in \R$, and 
+    \item \textbf{Triangle inequality}: $\lVert u + v\rVert \leq \lVert u \rVert + \lVert v \rVert$.
+\end{enumerate}
+
+A vector space that has a norm is called an \textit{normed vector space}.  Often, mathematicians technically want a slightly more precise type of normed vector space with a less obvious name: a \textit{Banach} space.
+
+\begin{definition}[Banach Space]
+    A (complete) vector space with a norm is called a \textit{Banach space}.   (As with Hilbert spaces, ``completeness'' is a technical requirement for some types of rigorous analysis, essentially allowing you to take limits.)
+
+  
+\end{definition}
+
+For example, given any inner product $\langle u , v \rangle$, there is a corresponding norm $\lVert u \rVert = \sqrt{\langle u , u \rangle}$.   (Thus, every Hilbert space is also a Banach space.\footnote{Proving the triangle inequality for an arbitrary inner product is not so obvious; one uses a result called the Cauchy--Schwarz inequality.})
+
+To define derivatives, we technically need both the input \textit{and} the output to be Banach spaces. To see this, recall our formalism 
+\[
+f(x + \delta x) - f(x) = \underbrace{f'(x) [\delta x]}_{\mbox{linear}} \; + \underbrace{o(\delta x)}_{\mbox{smaller}}\, .
+\]
+To precisely define the sense in which the $o(\delta x)$ terms are ``smaller'' or ``higher-order,'' we need norms. In particular, the ``little-$o$'' notation $o(\delta x)$ denotes any function such that 
+\[
+\lim_{\delta x\to 0} \frac{\lVert o (\delta x) \rVert}{\lVert \delta x\rVert} = 0 \, ,
+\]
+i.e.~which goes to zero faster than linearly in $\delta x$.
+This requires both the input $\delta x$ and the output (the function) to have norms.  This extension of differentiation to arbitrary normed/Banach spaces is sometimes called the \textbf{Fr{\'e}chet derivative}.

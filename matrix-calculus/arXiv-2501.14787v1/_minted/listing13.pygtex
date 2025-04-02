@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{Babylonian}\PYG{p}{(}\PYG{n}{x}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{ϵ}\PYG{p}{)}
+\PYG{g+go}{7.0 + 0.07142857142857142ϵ}
+\end{Verbatim}

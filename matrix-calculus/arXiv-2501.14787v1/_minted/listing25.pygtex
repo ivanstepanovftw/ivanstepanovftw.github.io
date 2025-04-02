@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{Distributions}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{StochasticAD}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{X}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)}
+\PYG{+w}{           }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{           }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{100}
+\PYG{+w}{               }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{rand}\PYG{p}{(}\PYG{n}{Bernoulli}\PYG{p}{(}\PYG{n}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{n}\PYG{o}{+}\PYG{n}{i}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{200}\PYG{p}{)))}
+\PYG{+w}{           }\PYG{k}{end}
+\PYG{+w}{           }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{n}
+\PYG{+w}{       }\PYG{k}{end}
+\PYG{g+go}{X (generic function with 1 method)}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{mean}\PYG{p}{(}\PYG{n}{X}\PYG{p}{(}\PYG{l+m+mf}{0.5}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{\PYGZus{}}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{10000}\PYG{p}{)}\PYG{+w}{ }\PYG{c}{\PYGZsh{} calculate E[X(p)] at p = 0.5}
+\PYG{g+go}{32.6956}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{st}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{stochastic\PYGZus{}triple}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.5}\PYG{p}{)}\PYG{+w}{ }\PYG{c}{\PYGZsh{} sample a single stochastic triple at p = 0.5}
+\PYG{g+go}{StochasticTriple of Int64:}
+\PYG{g+go}{32 + 0δp + (1 with probability 74.17635818221052δp)}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{derivative\PYGZus{}contribution}\PYG{p}{(}\PYG{n}{st}\PYG{p}{)}\PYG{+w}{ }\PYG{c}{\PYGZsh{} derivative estimate produced by this triple}
+\PYG{g+go}{74.17635818221052}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{c}{\PYGZsh{} compute d/dp of E[X(p)] by taking many samples}
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{mean}\PYG{p}{(}\PYG{n}{derivative\PYGZus{}contribution}\PYG{p}{(}\PYG{n}{stochastic\PYGZus{}triple}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.5}\PYG{p}{))}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{10000}\PYG{p}{)}
+\PYG{g+go}{56.65142976168479}
+\end{Verbatim}

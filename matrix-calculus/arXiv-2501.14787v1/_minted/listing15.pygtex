@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{∇h}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\PYG{+w}{           }\PYG{n}{∇f}\PYG{p}{(}\PYG{n}{y}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Zygote}\PYG{o}{.}\PYG{n}{gradient}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{)[}\PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{+w}{           }\PYG{n}{∇g}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Zygote}\PYG{o}{.}\PYG{n}{gradient}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{∇f}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))[}\PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{+w}{           }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{ForwardDiff}\PYG{o}{.}\PYG{n}{derivative}\PYG{p}{(}\PYG{n}{α}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{∇f}\PYG{p}{(}\PYG{n}{x}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{α}\PYG{o}{*}\PYG{n}{∇g}\PYG{p}{),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{       }\PYG{k}{end}
+\end{Verbatim}

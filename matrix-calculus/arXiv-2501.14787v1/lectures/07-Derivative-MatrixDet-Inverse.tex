@@ -1,0 +1,99 @@
+\subsection{Two Derivations}
+
+This section of notes follows \href{https://rawcdn.githack.com/mitmath/matrixcalc/b08435612045b17745707f03900e4e4187a6f489/notes/determinant_and_inverse.html}{this} Julia notebook. This notebook is a little bit short, but is an important and useful calculation.
+
+\begin{theorem}
+    Given $A$ is a square matrix, we have 
+    \[
+    \nabla (\det A) = \cofactor(A) = (\det A)A^{-T} := \adj(A^T) = \adj(A)^T 
+    \]
+    where $\adj$ is the ``adjugate''.   (You may not have heard of the matrix adjugate, but this formula tells us that it is simply $\adj(A) = \det(A) A^{-1}$, or $\cofactor(A) = \adj(A^T)$.) Furthermore, 
+    \[
+    \d (\det A) = \tr(\det(A) A^{-1} \d A) = \tr (\adj(A) \d A) = \tr(\cofactor (A)^T \d A).
+    \]
+\end{theorem}
+
+You may remember that each entry $(i,j)$ of the cofactor matrix is $(-1)^{i + j}$ times the determinant obtained by deleting row $i$ and column $j$ from $A$. Here are some $2 \times 2$ calculuations to obtain some intuition about these functions: 
+\begin{align}
+    M &= \begin{pmatrix}
+        a & c \\ b & d    
+    \end{pmatrix} \\
+    \implies \cofactor(M) &= \begin{pmatrix}
+         d & -c \\ -b & a
+    \end{pmatrix}  \\
+    \adj(M) &= \begin{pmatrix}
+d & -b \\ -c & a
+\end{pmatrix} \\
+(M)^{-1}  &= \frac{1}{ad-bc} \begin{pmatrix}
+    d & -b \\ -c & a
+\end{pmatrix}.
+\end{align}
+
+Numerically, as is done in the notebook, you can construct a random $n \times n$ matrix $A$ (say, $9 \times 9$), consider e.g.~$\d A = .00001 A$, and see numerically that 
+\[
+\det(A + \d A) - \det (A) \approx \tr(\adj(A) \d A),
+\]
+which numerically supports our claim for the theorem. 
+
+We now prove the theorem in two ways. Firstly, there is a direct proof where you just differentiate the scalar with respect to every input using the \href{https://en.wikipedia.org/wiki/Laplace_expansion}{cofactor expansion} of the determinant based on the $i$-th row. Recall that 
+\[
+\det (A) = A_{i1} C_{i1} +A_{i2} C_{i2} + \dots + A_{in} C_{in}.
+\]
+Thus, 
+\[
+\frac{\partial \det A}{ \partial A_{ij}} = C_{ij} \implies \nabla (\det A) = C, 
+\]
+the cofactor matrix.  (In computing these partial derivatives, it's important to remember that the cofactor $C_{ij}$ contains no elements of $A$ from row~$i$ or column~$j$.  So, for example, $A_{i1}$ only appears explicitly in the first term, and not hidden in any of the $C$ terms in this expansion.)
+
+There is also a fancier proof of the theorem using linearization near the identity. Firstly, note that it is easy to see from the properties of determinants that $$\det(I + \d A) - 1 = \tr(\d A),$$ and thus 
+\begin{align*}
+    \det(A + A(A^{-1} \d A)) - \det (A) &= \det(A) (\det (I + A^{-1} \d A) - 1) \\
+    &= \det(A) \tr(A^{-1} \d A) = \tr(\det (A) A^{-1} \d A) \\
+    &= \tr(\adj(A) \d A).
+\end{align*}
+This also implies the theorem.
+
+\subsection{Applications}
+\subsubsection{Characteristic Polynomial}
+
+We now use this as an application to find the derivative of a characteristic polynomial evaluated at $x$. Let $p(x) = \det(xI -A)$, a scalar function of $x$. Recall that through factorization, $p(x)$ may be written in terms of eigenvalues $\lambda_i$. So we may ask: what is the derivative of $p(x)$, the characteristic polynomial at $x$? Using freshman calculus, we could simply compute 
+\[
+\frac{\d}{\d x} \prod_i (x-\lambda_i) = \sum_i \prod_{j\neq i} (x-\lambda_j)  = \prod (x-\lambda_i) \{\sum_i (x- \lambda_i)^{-1}\},
+\]
+as long as $x \neq \lambda_i$.
+
+This is a perfectly good simply proof, but with our new technology we have a new proof:
+\begin{align*}
+    \d (\det (x I - A)) &= \det(x I - A) \tr((xI - A)^{-1} \d (x I - A)) \\
+    &= \det(xI - A) \tr(x I - A)^{-1} \d x.
+\end{align*}
+Note that here we used that $\d (x I - A) = \d x \, I$ when $A$ is constant and $\tr (A \d x) = \tr(A) \d x$ since $\d x$ is a scalar.
+
+We may again check this computationally as we do in the notebook.
+
+\subsubsection{The Logarithmic Derivative}
+
+We can similarly compute using the chain rule that 
+\[
+\d (\log (\det (A))) = \frac{\d (\det A)}{ \det A} = \det (A^{-1}) \d (\det (A)) = \tr(A^{-1} \d A).
+\]
+The logarithmic derivative shows up a lot in applied mathematics. Note that here we use that $\frac{1}{\det A} = \det(A^{-1})$ as $1 = \det(I) = \det(AA^{-1}) = \det (A) \det(A^{-1}).$
+
+For instance, recall Newton's method to find roots $f(x)=0$ of single-variable real-valued functions $f(x)$ by taking a sequence of steps $x \to x + \delta x$.  The key formula in Newton's method is $\delta x = f'(x)^{-1}f(x)$, but this is the same as $\frac{1}{(\log f(x))'}$. So, derivatives of log determinants show up in finding \emph{roots of determinants}, i.e.~for $f(x) = \det M(x)$.  When $M(x) = A - x I$, roots of the determinant are eigenvalues of $A$.  For more general functions $M(x)$, solving $\det M(x) = 0$ is therefore called a \emph{nonlinear eigenproblem}.
+
+\subsection{Jacobian of the Inverse}
+\label{sec:jacobian-inverse}
+
+Lastly, we compute the derivative (as both a linear operator and an explicit Jacobian matrix) of the inverse of a matrix. There is a neat trick to obtain this derivative, simply from the property $A^{-1}A = I$ of the inverse.  By the product rule, this implies that
+\begin{align*}
+\d (A^{-1} A) &= d(I) = 0 = \d (A^{-1}) A + A^{-1} \d A \\
+& \implies \boxed{\d (A^{-1}) = (A^{-1})'[dA] = - A^{-1} \, \d A \, A^{-1} }\, .
+\end{align*}
+Here, the second line defines a perfectly good linear operator for the derivative $(A^{-1})'$, but if we want we can rewrite this as an explicit Jacobian matrix by using Kronecker products acting on the ``vectorized'' matrices as we did in Sec.~\ref{sec:kronecker}:
+\[
+\vecm\left(\d (A^{-1})\right) = \vecm\left(-A^{-1} (\d A) A^{-1}\right) = \underbrace{- (A^{-T} \otimes A^{-1})}_\mathrm{Jacobian} \vecm(\d A) \, ,
+\]
+where $A^{-T}$ denotes $(A^{-1})^T = (A^T)^{-1}$.
+One can check this formula numerically, as is done in the notebook.
+
+In practice, however, you will probably find that the operator expression $- A^{-1} \, \d A \, A^{-1}$ is more useful than explicit Jacobian matrix for taking derivatives involving matrix inverses.  For example, if you have a matrix-valued function $A(t)$ of a scalar parameter $t \in \mathbb{R}$, you immediately obtain $\frac{d(A^{-1})}{dt} = -A^{-1} \frac{dA}{dt} A^{-1}$.   A more sophisticated application is discussed in Sec.~\ref{sec:adjoint-method}.

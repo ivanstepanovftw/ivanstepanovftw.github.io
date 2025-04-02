@@ -1,0 +1,140 @@
+\documentclass{article}
+\pdfoutput=1
+\usepackage[utf8]{inputenc}
+\usepackage[serif]{lindrew}
+\usepackage{cancel}
+\usepackage{pgf, tikz}
+\usepackage{pdfpages}
+\usepackage{mathdots}
+\usepackage{subcaption}
+\usetikzlibrary{arrows, automata}
+\usepackage{upgreek}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+% change to frozencache for uploading to arXiv, and include the _minted files in the arXiv submission
+\usepackage[frozencache,cachedir=_minted]{minted}
+
+%\usepackage{todonotes}
+\newcommand{\todo}[1]{}
+
+\title{Matrix Calculus \\ (for Machine Learning and Beyond)}
+\author{\textbf{Lecturers: Alan Edelman and Steven~G.~Johnson} \\ Notes by Paige Bright, Alan Edelman, and Steven~G.~Johnson}
+
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{03B5}{$\upvarepsilon$}
+\DeclareUnicodeCharacter{03B4}{$\updelta$}
+\DeclareUnicodeCharacter{03C9}{$\upomega$}
+\DeclareUnicodeCharacter{2032}{$^\prime$}
+\DeclareUnicodeCharacter{2248}{$\approx$}
+\DeclareUnicodeCharacter{221A}{$\surd$}
+\DeclareUnicodeCharacter{03F5}{$\upepsilon$}
+\DeclareUnicodeCharacter{2207}{$\nabla$}
+\DeclareUnicodeCharacter{03B1}{$\upalpha$}
+
+
+\renewcommand{\d}{d}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\cofactor}{\mathrm{cofactor}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\vecm}{\operatorname{vec}}
+\newcommand{\dotstar}{\mathbin{.*}}
+\newcommand{\evalat}[2]{\left. #1 \right|_{#2}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\usepackage{kbordermatrix}
+\renewcommand{\kbldelim}{(} % change array delimiters to (...)
+\renewcommand{\kbrdelim}{)}
+
+\newcommand{\alan}[1]{\textcolor{blue}{#1}}
+
+\date{Based on MIT course 18.S096 (now 18.063) in IAP 2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\pagebreak
+
+\addcontentsline{toc}{section}{Introduction}
+\section*{Introduction}
+\input{lectures/0-Introduction}
+
+\pagebreak
+
+\section{Overview and Motivation}
+\input{lectures/01-Overview}
+
+\pagebreak
+
+\section{Derivatives as Linear Operators} \label{sec1S}
+\input{lectures/02-Derivatives-LinearOperators}
+
+
+\pagebreak
+
+\section{Jacobians of Matrix Functions}
+\label{sec:kronecker}
+\input{lectures/03-TwobyTwoJacobians}
+
+\pagebreak
+
+\section{Finite-Difference Approximations}
+\label{sec:finitedifference}
+\input{lectures/04-FiniteDifferences}
+
+\pagebreak
+\section{Derivatives in General Vector Spaces}
+\label{sec:generalvectorspaces}
+\input{lectures/05-Derivatives-GeneralVectorSpaces}
+
+\pagebreak
+
+\section[Nonlinear Root-Finding, Optimization, and Adjoint Differentiation]{Nonlinear Root-Finding, Optimization,\\ and Adjoint Differentiation}
+\input{lectures/06-RootFinding-Optimization-Adjoints}
+
+\pagebreak
+\section{Derivative of Matrix Determinant and Inverse}
+\input{lectures/07-Derivative-MatrixDet-Inverse}
+
+\pagebreak
+
+\section{Forward and Reverse-Mode Automatic Differentiation}
+\label{sec:AD}
+\input{lectures/08-Forward-Reverse-AD}
+
+\pagebreak
+
+\section{Differentiating ODE solutions}
+\input{lectures/09-DifferentiatingODESolutions}
+
+\pagebreak
+
+\section{Calculus of Variations}
+\input{lectures/10-CalculusofVariations}
+
+\pagebreak
+
+\section{Derivatives of Random Functions}
+\input{lectures/11-Derivatives-RandomFunctions}
+
+\pagebreak
+
+\section[Second Derivatives, Bilinear Maps,
+and Hessian Matrices]{Second Derivatives, Bilinear Maps, \\
+and Hessian Matrices}
+\label{sec:hessians}
+\input{lectures/12-SecondDerivatives-BilinearMaps-Hessian}
+
+\pagebreak
+\section{Derivatives of Eigenproblems}
+\input{lectures/13-Derivatives-Eigenproblems}
+\pagebreak
+
+\section{Where We Go From Here}
+\input{lectures/14-WhereWeGoFromHere}
+
+\end{document}

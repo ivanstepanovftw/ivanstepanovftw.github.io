@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{randn}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{);}\PYG{+w}{ }\PYG{n}{δx}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{randn}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{l+m+mf}{1e\PYGZhy{}8}\PYG{p}{;}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\PYG{g+go}{\PYGZhy{}0.005284687528953334}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{∇h}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\PYG{g+go}{5\PYGZhy{}element Vector\PYGZob{}Float64\PYGZcb{}:}
+\PYG{g+go}{ \PYGZhy{}0.006779692698531759}
+\PYG{g+go}{  0.007176439898271982}
+\PYG{g+go}{ \PYGZhy{}0.006610264199241697}
+\PYG{g+go}{ \PYGZhy{}0.0012162087082746558}
+\PYG{g+go}{  0.007663756720005014}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{∇h}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{o}{\PYGZsq{}}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{δx}\PYG{+w}{    }\PYG{c}{\PYGZsh{} directional derivative}
+\PYG{g+go}{\PYGZhy{}3.0273434457397667e\PYGZhy{}10}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{(}\PYG{n}{x}\PYG{o}{+}\PYG{n}{δx}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{h}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{  }\PYG{c}{\PYGZsh{} finite\PYGZhy{}difference check}
+\PYG{g+go}{\PYGZhy{}3.0273433933303284e\PYGZhy{}10}
+\end{Verbatim}

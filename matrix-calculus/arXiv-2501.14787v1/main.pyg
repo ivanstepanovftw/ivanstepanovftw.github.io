@@ -1,0 +1,24 @@
+julia> using Distributions, StochasticAD
+
+julia> function X(p)
+           n = 0
+           for i in 1:100
+               n += rand(Bernoulli(p * (1 - (n+i)/200)))
+           end
+           return n
+       end
+X (generic function with 1 method)
+
+julia> mean(X(0.5) for _ in 1:10000) # calculate E[X(p)] at p = 0.5
+32.6956
+
+julia> st = stochastic_triple(X, 0.5) # sample a single stochastic triple at p = 0.5
+StochasticTriple of Int64:
+32 + 0δp + (1 with probability 74.17635818221052δp)
+
+julia> derivative_contribution(st) # derivative estimate produced by this triple
+74.17635818221052
+
+julia> # compute d/dp of E[X(p)] by taking many samples
+julia> mean(derivative_contribution(stochastic_triple(f, 0.5)) for i in 1:10000)
+56.65142976168479

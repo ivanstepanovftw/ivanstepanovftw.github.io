@@ -1,0 +1,569 @@
+When we have a function that has \emph{matrices} as inputs and/or
+outputs, we have already seen in the previous lectures that we can
+still define the derivative as a linear operator by a \emph{formula}
+for $f'$ mapping a small change in input to the corresponding small change in output. However,
+when you first learned linear algebra, probably most linear operations
+were represented by matrices multiplying vectors, and it may take
+a while to get used to thinking of linear operations more generally.
+In this chapter, we discuss how it is still \emph{possible} to represent
+$f'$ by a \textbf{Jacobian matrix} even for matrix inputs/outputs,
+and how the most common technique to do this involves \textbf{matrix
+``vectorization''} and a new type of matrix operation, a \textbf{Kronecker
+product}. This gives us another way to think about our $f'$ linear
+operators that is occasionally convenient, but at the same time it
+is important to become comfortable with other ways of writing down
+linear operators too---sometimes, the explicit Jacobian-matrix approach
+can obscure key structure, and it is often computationally inefficient as well.
+
+For this section of the notes, we refer to the linked \href{https://rawcdn.githack.com/mitmath/matrixcalc/3f6758996e40c5c1070279f89f7f65e76e08003d/notes/2x2Jacobians.jl.html}{Pluto Notebook}
+for computational demonstrations of this material in Julia, illustrating
+multiple views of the derivative of the square $A^{2}$ of $2\times2$
+matrices $A$.
+
+\subsection{Derivatives of matrix functions: Linear operators}
+
+As we have already emphasized, the derivative $f'$ is the linear
+operator that maps a small change in the input to a small change in
+the output. This idea can take an unfamiliar form, however, when applied
+to functions $f(A)$ that map matrix inputs $A$ to matrix outputs.
+For example, we've already considered the following functions on square
+$m\times m$ matrices:
+\begin{itemize}
+\item $f(A)=A^{3}$, which gives $df=f'(A)[dA]=dA\,A^{2}+A\,dA\,A+A^{2}\,dA$.
+\item $f(A)=A^{-1}$, which gives $df=f'(A)[dA]=-A^{-1}\,dA\,A^{-1}$
+\end{itemize}
+\begin{example}An even simpler example is the \emph{matrix-square}
+function:
+
+\[
+f(A)=A^{2}\,,
+\]
+which by the product rule gives 
+\[
+df=f'(A)[dA]=dA\,A+A\,dA\,.
+\]
+You can also work this out explicitly from $df=f(A+dA)-f(A)=(A+dA)^{2}-A^{2}$,
+dropping the $(dA)^{2}$ term.\end{example}
+
+In all of these examples, $f'(A)$ is described by a simple formula
+for $f'(A)[dA]$ that relates an arbitrary change $dA$ in $A$ to
+the change $df=f(A+dA)-f(A)$ in $f$, to first order. If the differential
+is distracting you, realize that we can plug any matrix $X$ we want
+into this formula, not just an ``infinitesimal'' change $dA$, e.g.~in
+our matrix-square example we have 
+\[
+f'(A)[X]=XA+AX
+\]
+ for an arbitrary $X$ (a directional derivative, from Sec.~\ref{sec:directional}). This is \emph{linear} in $X$: if we scale
+or add inputs, it scales or adds outputs, respectively:
+\[
+f'(A)[2X]=2XA+A\,2X=2(XA+AX)=2f'(A)[X]\,,
+\]
+\begin{align*}
+f'(A)[X+Y] & =(X+Y)A+A(X+Y)=XA+YA+AX+AY=XA+AX+YA+AY\\
+ & =f'(A)[X]+f'(A)[Y]\,.
+\end{align*}
+This is a perfectly good way to define a linear operation! We are
+\emph{not} expressing it here in the familiar form $f'(A)[X]=(\text{some matrix?})\times(X\text{ vector?})$,
+and that's okay! A formula like $XA+AX$ is easy to write down, easy
+to understand, and easy to compute with. 
+
+But sometimes you still may want to think of $f'$ as a single ``Jacobian''
+matrix, using the most familiar language of linear algebra, and it
+is possible to do that! If you took a sufficiently abstract linear-algebra
+course, you may have learned that \emph{any} linear operator can be
+represented by a matrix once you choose a basis for the input and
+output vector spaces. Here, however, we will be much more concrete,
+because there is a conventional ``Cartesian'' basis for matrices
+$A$ called ``vectorization'', and in this basis linear operators
+like $AX+XA$ are particularly easy to represent in matrix form once
+we introduce a new type of matrix product that has widespread applications
+in ``multidimensional'' linear algebra.
+
+\subsection{A simple example: The two-by-two matrix-square function}
+
+To begin with, let's look in more detail at our matrix-square function
+\[
+f(A)=A^{2}
+\]
+for the simple case of $2\times2$ matrices, which are described by
+only four scalars, so that we can look at every term in the derivative
+explicitly. In particular,
+
+\begin{example} For a $2\times2$ matrix 
+\[
+A=\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix},
+\]
+the matrix-square function is 
+\[
+f(A)=A^{2}=\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix}\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix}=\begin{pmatrix}p^{2}+qr & pr+rs\\
+pq+qs & qr+s^{2}
+\end{pmatrix}.
+\]
+\end{example}
+
+Written out explicitly in terms of the matrix entries $(p,q,r,s)$
+in this way, it is natural to think of our function as mapping 4
+scalar inputs to 4 scalar outputs. That is, we can think of $f$
+as equivalent to a ``vectorized'' function $\tilde{f}:\R^{4}\to\R^{4}$
+given by 
+\[
+\tilde{f}(\left(\begin{array}{c}
+p\\
+q\\
+r\\
+s
+\end{array}\right))=\left(\begin{array}{c}
+p^{2}+qr\\
+pq+qs\\
+pr+rs\\
+qr+s^{2}
+\end{array}\right)\,.
+\]
+Converting a matrix into a column vector in this way is called \textbf{vectorization},
+and is commonly denoted by the operation ``$\vecm$'':
+\begin{align*}
+\vecm A & =\vecm\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix}=\kbordermatrix{ & \\
+A_{1,1} & p\\
+A_{2,1} & q\\
+A_{1,2} & r\\
+A_{2,2} & s
+} \, ,\\
+\vecm f(A) & =\vecm\begin{pmatrix}p^{2}+qr & pr+rs\\
+pq+qs & qr+s^{2}
+\end{pmatrix}=\left(\begin{array}{c}
+p^{2}+qr\\
+pq+qs\\
+pr+rs\\
+qr+s^{2}
+\end{array}\right) \, .
+\end{align*}
+In terms of $\vecm$, our ``vectorized'' matrix-squaring function
+$\tilde{f}$ is defined by 
+\[
+\tilde{f}(\vecm A)=\vecm f(A)=\vecm(A^{2})\,.
+\]
+More generally, \begin{definition}The \textbf{vectorization} $\vecm A\in\mathbb{R}^{mn}$
+of any $m\times n$ matrix $A\in\mathbb{R}^{m\times n}$ is a defined
+by simply \textbf{stacking the columns} of $A$, from left to right,
+into a column vector $\vecm A$. That is, if we denote the $n$ columns
+of $A$ by $m$-component vectors $\vec{a}_{1},\vec{a}_{2},\ldots\in\mathbb{R}^{m}$,
+then
+\[
+\vecm A=\vecm\underbrace{\left(\begin{array}{cccc}
+\vec{a}_{1} & \vec{a}_{2} & \cdots & \vec{a}_{n}\end{array}\right)}_{A\in\mathbb{R}^{m\times n}}=\left(\begin{array}{c}
+\vec{a}_{1}\\
+\vec{a}_{2}\\
+\vdots\\
+\vec{a}_{n}
+\end{array}\right)\in\mathbb{R}^{mn}
+\]
+is an $mn$-component column vector containing all of the entries of
+$A$.
+
+On a computer, matrix entries are typically stored in a consecutive
+sequence of memory locations, which can be viewed a form of vectorization.
+In fact, $\vecm A$ corresponds exactly to what is known as ``column-major''
+storage, in which the column entries are stored consecutively; this
+is the default format in Fortran, Matlab, and Julia, for example,
+and the venerable Fortran heritage means that column major is widely used in
+linear-algebra libraries. \end{definition}.
+
+\begin{problem}The vector $\vecm A$ corresponds to the coefficients
+you get when you express the $m\times n$ matrix $A$ in a \emph{basis}
+of matrices. What is that basis? \end{problem}
+
+Vectorization turns unfamilar things (like matrix functions and derivatives
+thereof) into familiar things (like vector functions and Jacobians
+or gradients thereof). In that way, it can be a very attractive tool,
+almost \emph{too} attractive---why do ``matrix calculus'' if you
+can turn everything back into ordinary multivariable calculus? Vectorization
+has its drawbacks, however: conceptually, it can obscure the underlying
+mathematical structure (e.g. $\tilde{f}$ above doesn't look much
+like a matrix square $A^{2}$), and computationally this loss of structure
+can sometimes lead to severe inefficiencies (e.g. forming huge $m^2\times m^2$
+Jacobian matrices as discussed below). Overall, we believe that the
+\emph{primary} way to study matrix functions like this should be to
+view them as having matrix inputs ($A$) and matrix outputs ($A^{2}$), and that one should likewise generally view the derivatives as linear operators on matrices,
+not vectorized versions thereof. However, it is still useful to be
+familiar with the vectorization viewpoint in order to have the benefit
+of an alternative perspective.
+
+\subsubsection{The matrix-squaring four-by-four Jacobian matrix}
+
+To understand Jacobians of functions (from matrices to matrices),
+let's begin by considering a basic question: \begin{question} What is the
+\emph{size} of the Jacobian of the matrix-square function? \end{question}
+
+Well, if we view the matrix squaring function via its vectorized equivalent
+$\tilde{f}$, mapping $\mathbb{R}^{4}\mapsto\mathbb{R}^{4}$ (4-component
+column vectors to 4-component column vectors), the Jacobian would
+be a $4\times4$ matrix (formed from the derivatives of each output
+component with respect to each input component). Now let's think about
+a more general square matrix $A$: an $m\times m$ matrix. If we wanted
+to find the Jacobian of $f(A)=A^{2}$, we could do so by the same
+process and (symbolically) obtain an $m^{2}\times m^{2}$ matrix (since
+there are $m^{2}$ inputs, the entries of $A$, and $m^{2}$ outputs,
+the entries of $A^{2}$). Explicit computation of these $m^{4}$ partial derivatives
+is rather tedious even for small $m$, but is a task that symbolic computational
+tools in e.g.~Julia or Mathematica can handle. In fact, as seen in the
+\href{https://rawcdn.githack.com/mitmath/matrixcalc/3f6758996e40c5c1070279f89f7f65e76e08003d/notes/2x2Jacobians.jl.html}{Notebook},
+Julia spits out the Jacobian quite easily. For the $m=2$ case that we
+wrote out explicitly above, you can either take the derivative of
+$\tilde{f}$ by hand or use Julia's symbolic tools to obtain the Jacobian:
+\begin{equation}
+\tilde{f}'=\kbordermatrix{& (1,1) & (2,1) & (1,2) & (2,2) \\
+(1,1) & 2p & r & q & 0\\
+(2,1) & q & p+s & 0 & q\\
+(1,2) & r & 0 & p+s & r\\
+(2,2) & 0 & r & q & 2s
+} \,.
+\end{equation}
+For example, the first row of $\tilde{f}'$ consists of the partial
+derivatives of $p^{2}+qr$ (the first output) with respect to the
+4 inputs $p,q,r,\mbox{and }s$.   Here, we have labeled the rows by the (row,column) indices $(j_\mathrm{out}, k_\mathrm{out})$ of the entries in the ``output'' matrix $d(A^2)$, and have labeled the columns by the indices $(j_\mathrm{in}, k_\mathrm{in})$ of the entries in the ``input'' matrix $A$.  Although we have written the Jacobian $\tilde{f}'$ as a ``2d'' matrix, you can therefore also imagine it to be a ``4d'' matrix indexed by $j_\mathrm{out}, k_\mathrm{out}, j_\mathrm{in}, k_\mathrm{in}$.
+
+However, the matrix-calculus approach of viewing the derivative $f'(A)$
+as a \emph{linear transformation on matrices} (as we derived above),
+\[
+f'(A)[X]=XA+AX\,,
+\]
+seems to be much more revealing than writing out an explicit component-by-component
+``vectorized'' Jacobian $\tilde{f}'$, and gives a formula for any
+$m\times m$ matrix without   laboriously requiring us to take $m^{4}$ partial
+derivatives one-by-one. If we really want to pursue the vectorization perspective,
+we need a way to recapture some of the structure that is obscured
+by tedious componentwise differentiation. A key tool to bridge the
+gap between the two perspectives is a type of matrix operation that
+you may not be familiar with: \textbf{Kronecker products} (denoted
+$\otimes$).
+
+\subsection{Kronecker Products}
+
+A linear operation like $f'(A)[X]=XA+AX$ can be thought of as a ``higher-dimensional
+matrix:'' ordinary ``2d'' matrices map ``1d'' column vectors to 1d
+column vectors, whereas to map 2d matrices to 2d matrices you might
+imagine a ``4d'' matrix (sometimes called a \emph{tensor}). To transform
+2d matrices back into 1d vectors, we already saw the concept of vectorization
+($\vecm A$). A closely related tool, which transforms ``higher dimensional''
+linear operations on matrices back into ``2d'' matrices for the vectorized
+inputs/outputs, is the Kronecker product $A\otimes B$. Although they
+don't often appear in introductory linear-algebra courses, Kronecker
+products show up in a wide variety of mathematical applications where
+multidimensional data arises, such as multivariate statistics and
+data science or multidimensional scientific/engineering problems.
+
+\begin{definition}If $A$ is an $m\times n$ matrix with entries
+$a_{ij}$ and $B$ is a $p\times q$ matrix, then their \textbf{Kronecker
+product} $A\otimes B$ is defined by
+\[
+A=\left(\begin{array}{ccc}
+a_{11} & \cdots & a_{1n}\\
+\vdots & \ddots & \vdots\\
+a_{m1} & \cdots & a_{mn}
+\end{array}\right)\Longrightarrow\underbrace{A}_{m\times n}\otimes\underbrace{B}_{p\times q}=\underbrace{\left(\begin{array}{ccc}
+a_{11}B & \cdots & a_{1n}B\\
+\vdots & \ddots & \vdots\\
+a_{m1}B & \cdots & a_{mn}B
+\end{array}\right)}_{mp\times nq}\,,
+\]
+so that $A\otimes B$ is an $mp\times nq$ matrix formed by ``pasting
+in'' a copy of $B$ multiplying every element of $A$. \end{definition}
+For example, consider $2\times2$ matrices
+\[
+A=\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix}\text{~~and~~}B=\begin{pmatrix}a & c\\
+b & d
+\end{pmatrix} \, .
+\]
+Then $A\otimes B$ is a $4\times4$ matrix containing all possible
+products of entries $A$ with entries of $B$. Note that $A\otimes B\ne B\otimes A$
+(but the two are related by a re-ordering of the entries): 
+\[
+A\otimes B=\begin{pmatrix}p\red{B} & rB\\
+qB & sB
+\end{pmatrix}=\begin{pmatrix}p\red{a} & p\red{c} & ra & rc\\
+p\red{b} & p\red{d} & rb & rd\\
+qa & qc & sa & sc\\
+qb & qd & sb & sd
+\end{pmatrix}\qquad\ne\qquad B\otimes A=\begin{pmatrix}aA & cA\\
+bA & dA
+\end{pmatrix}=\begin{pmatrix}\red{a}p & ar & \red{c}p & cr\\
+aq & as & cq & cs\\
+\red{b}p & br & \red{d}p & dr\\
+bq & bs & dq & ds
+\end{pmatrix} \, ,
+\]
+where we've colored one copy of $B$ red for illustration.
+See the \href{https://rawcdn.githack.com/mitmath/matrixcalc/3f6758996e40c5c1070279f89f7f65e76e08003d/notes/2x2Jacobians.jl.html}{Notebook}
+for more examples of Kronecker products of matrices (including some
+with pictures rather than numbers!). 
+
+Above, we saw that $f(A)=A^{2}$ at $A=\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix}$ could be thought of as an equivalent function $\tilde{f}(\vecm A)$
+mapping column vectors of 4 inputs to 4 outputs ($\mathbb{R}^{4}\mapsto\mathbb{R}^{4}$),
+with a $4\times4$ Jacobian that we (or the computer) laboriously
+computed as 16 element-by-element partial derivatives. It turns out
+that this result can be obtained \emph{much} more elegantly once we
+have a better understanding of Kronecker products. We will find that
+the $4\times4$ ``vectorized'' Jacobian is simply
+\[
+\tilde{f}'=\Id_{2}\otimes A+A^{T}\otimes\Id_{2}\,,
+\]
+where $\Id_{2}$ is the $2\times2$ identity matrix. That is, the
+matrix linear operator $f'(A)[dA]=dA\,A+A\,dA$ is equivalent, after
+vectorization, to:
+
+\[
+\vecm\underbrace{f'(A)[dA]}_{dA\,A+A\,dA}=\underbrace{(\Id_{2}\otimes A+A^{T}\otimes\Id_{2})}_{\tilde{f}'}\vecm dA=\underbrace{\begin{pmatrix}2p & r & q & 0\\
+q & p+s & 0 & q\\
+r & 0 & p+s & r\\
+0 & r & q & 2s
+\end{pmatrix}}_{\tilde{f}'}\underbrace{\begin{pmatrix}dp\\
+dq\\
+dr\\
+ds
+\end{pmatrix}}_{\vecm dA}.
+\]
+In order to understand \emph{why} this is the case, however, we must
+first build up some understanding of the algebra of Kronecker products.
+To start with, a good exercise is to convince yourself of a few simpler
+properties of Kronecker products: \begin{problem} From the definition
+of the Kronecker product, derive the following identities:
+\begin{enumerate}
+\item $(A\otimes B)^{T}=A^{T}\otimes B^{T}$.
+\item $(A\otimes B)(C\otimes D)=(AC)\otimes(BD)$.
+\item $(A\otimes B)^{-1}=A^{-1}\otimes B^{-1}$.  (Follows from property~2.)
+\item $A\otimes B$ is orthogonal (its transpose is its inverse) if $A$
+and $B$ are orthogonal. (From properties 1~\&~3.)
+\item $\det(A\otimes B)=\det(A)^{m}\det(B)^{n}$, where $A\in\R^{n,n}$
+and $B\in\R^{m,m}$.
+\item $\tr(A\otimes B)=(\tr A)(\tr B)$.
+\item Given eigenvectors/values $Au=\lambda u$ and $Bv=\mu v$ of $A$
+and $B$, then $\lambda\mu$ is an eigenvalue of $A\otimes B$ with
+eigenvector $u\otimes v$. (Also, since $u\otimes v=\vecm X$ where
+$X=vu^{T}$, you can relate this via Prop.~\ref{prop5000} below to the identity $BXA^{T}=Bv(Au)^T=\lambda\mu X$.) 
+\end{enumerate}
+\end{problem}
+
+\subsubsection{Key Kronecker-product identity}
+
+In order to convert linear operations like $AX+XA$ into Kronecker
+products via vectorization, the key identity is:
+
+\begin{proposition}\label{prop5000} Given (compatibly sized) matrices
+$A,B,C$, we have
+\[
+(A\otimes B)\vecm(C)=\vecm(BCA^{T}).
+\]
+We can thus view $A\otimes B$ as a vectorized equivalent of the linear
+operation $C\mapsto BCA^{T}$. We are tempted to introduce a parallel
+notation $(A\otimes B)[C]=BCA^{T}$ for the ``non-vectorized'' version
+of this operation, although this notation is not standard.
+
+One possible mnemonic for this identity is that
+the $B$ is just to the left of the $C$ while the $A$ ``circles around'' to the right and gets transposed.
+\end{proposition}
+
+Where does this identity come from? We can break it into simpler pieces by
+first considering the cases where either $A$ or $B$ is an identity
+matrix $\Id$ (of the appropriate size). To start with, suppose that
+$A=\Id$, so that $BCA^{T}=BC$. What is $\vecm(BC)$? If we let $\vec{c}_{1},\vec{c}_{2},\ldots$
+denote the columns of $C$, then recall that $BC$ simply multiples
+$B$ on the left with each of the columns of $C$: 
+\[
+BC=B\left(\begin{array}{ccc}
+\vec{c}_{1} & \vec{c}_{2} & \cdots\end{array}\right)=\left(\begin{array}{ccc}
+B\vec{c}_{1} & B\vec{c}_{2} & \cdots\end{array}\right)\Longrightarrow\vecm(BC)=\left(\begin{array}{c}
+B\vec{c}_{1}\\
+B\vec{c}_{2}\\
+\vdots
+\end{array}\right).
+\]
+Now, how can we get this $\vecm(BC)$ vector as something multiplying
+$\vecm C$? It should be immediately apparent that 
+\[
+\vecm(BC)=\left(\begin{array}{c}
+B\vec{c}_{1}\\
+B\vec{c}_{2}\\
+\vdots
+\end{array}\right)=\underbrace{\left(\begin{array}{ccc}
+B\\
+ & B\\
+ &  & \ddots
+\end{array}\right)}_{\Id\otimes B}\underbrace{\left(\begin{array}{c}
+\vec{c}_{1}\\
+\vec{c}_{2}\\
+\vdots
+\end{array}\right)}_{\vecm C},
+\]
+but this matrix is exactly the Kronecker product $I\otimes B$! Hence,
+we have derived that 
+\[
+(\Id\otimes B)\vecm C=\vecm(BC).
+\]
+What about the $A^{T}$ term? This is a little trickier, but again
+let's simplify to the case where $B=\Id$, in which case $BCA^{T}=CA^{T}$.
+To vectorize this, we need to look at the columns of $CA^{T}$. What
+is the first column of $CA^{T}$? It is a linear combination of the
+columns of $C$ whose coefficients are given by the first column of
+$A^{T}$ (=~first row of $A$): 
+\[
+\text{column 1 of }CA^{T}=\sum_{j}a_{1j}\vec{c}_{j}\:.
+\]
+Similarly for column~2, etc, and we then ``stack'' these columns
+to get $\vecm(CA^{T})$. But this is exactly the formula for multipling
+a matrix $A$ by a vector, if the ``elements'' of the vector were
+the columns $\vec{c}_{j}$. Written out explicitly, this becomes:
+\[
+\vecm(CA^{T})=\left(\begin{array}{c}
+\sum_{j}a_{1j}\vec{c}_{j}\\
+\sum_{j}a_{2j}\vec{c}_{j}\\
+\vdots
+\end{array}\right)=\underbrace{\left(\begin{array}{ccc}
+a_{11}\Id & a_{12}\Id & \cdots\\
+a_{21}\Id & a_{22}\Id & \cdots\\
+\vdots & \vdots & \ddots
+\end{array}\right)}_{A\otimes\Id}\underbrace{\left(\begin{array}{c}
+\vec{c}_{1}\\
+\vec{c}_{2}\\
+\vdots
+\end{array}\right)}_{\vecm C},
+\]
+and hence we have derived
+\[
+(A\otimes\Id)\vecm C=\vecm(CA^{T}).
+\]
+The full identity $(A\otimes B)\vecm(C)=\vecm(BCA^{T})$ can then
+be obtained by straightforwardly combining these two derivations: replace $CA^T$ with $BCA^T$ in the second derivation, which replaces $\vec{c}_j$ with $B\vec{c}_j$ and hence $\Id$ with $B$.
+
+\subsubsection{The Jacobian in Kronecker-product notation}
+
+So now we want to use Prop.~\ref{prop5000} to calculate the
+Jacobian of $f(A)=A^{2}$ in terms of the Kronecker product. Let $\d A$
+be our $C$ in Prop.~\ref{prop5000}. We can now immediately see that
+\[
+\vecm(A\,dA+\d A\,A)=\underbrace{(\Id\otimes A+A^{T}\otimes\Id)}_{\mbox{Jacobian }\tilde{f}'(\vecm A)}\vecm(\d A) \, ,
+\]
+where $\Id$ is the identity matrix of the same size as $A$. We can
+also write this in our ``non-vectorized'' linear-operator notation:
+\[
+A\,\d A+\d A\,A=(\Id\otimes A+A^{T}\otimes\Id)[\d A] \, .
+\]
+In the $2\times2$ example, these Kronecker products can be computed
+explicitly: 
+\begin{align*}
+\underbrace{\begin{pmatrix}1 & \\
+ & 1
+\end{pmatrix}}_{\Id}\otimes\underbrace{\begin{pmatrix}p & r\\
+q & s
+\end{pmatrix}}_{A}+\underbrace{\begin{pmatrix}p & q\\
+r & s
+\end{pmatrix}}_{A^{T}}\otimes\underbrace{\begin{pmatrix}1 & \\
+ & 1
+\end{pmatrix}}_{\Id} & =\underbrace{\left(\begin{array}{cccc}
+p & r &  & \\
+q & s &  & \\
+ &  & p & r\\
+ &  & q & s
+\end{array}\right)}_{\Id\otimes A}+\underbrace{\left(\begin{array}{cccc}
+p &  & q & \\
+ & p &  & q\\
+r &  & s & \\
+ & r &  & s
+\end{array}\right)}_{A^{T}\otimes\Id}\\
+ & =\left(\begin{array}{cccc}
+2p & r & q & 0\\
+q & p+s & 0 & q\\
+r & 0 & p+s & r\\
+0 & r & q & 2s
+\end{array}\right)=\tilde{f}'\,,
+\end{align*}
+which exactly matches our laboriously computed Jacobian $\tilde{f}'$
+from earlier!
+
+\begin{example}For the matrix-cube function $A^{3}$, where $A$
+is an $m\times m$ square matrix, compute the $m^{2}\times m^{2}$
+Jacobian of the vectorized function $\vecm(A^{3})$.\end{example}
+Let's use the same trick for the matrix-cube function. Sure, we could
+laboriously compute the Jacobian via element-by-element partial derivatives
+(which is done nicely by symbolic computing in the notebook), but
+it's much easier and more elegant to use Kronecker products. Recall
+that our ``non-vectorized'' matrix-calculus derivative is the linear
+operator: 
+\[
+(A^{3})'[dA]=dA\,A^{2}+A\,dA\,A+A^{2}\,dA,
+\]
+which now vectorizes by three applications of the Kronecker
+identity:
+\[
+\vecm(dA\,A^{2}+A\,dA\,A+A^{2}\,dA)=\underbrace{\left((A^{2})^{T}\otimes\Id+A^{T}\otimes A+\Id\otimes A^{2}\right)}_{\text{vectorized Jacobian}}\vecm(\d X)\,.
+\]
+You could go on to find the Jacobians of $A^{4}$, $A^{5}$, and so
+on, or any linear combination of matrix powers. Indeed, you could
+imagine applying a similar process to the Taylor series of any (analytic)
+matrix function $f(A)$, but it starts to become awkward. Later on
+(and in homework), we will discuss more elegant ways to differentiate
+other matrix functions, not as vectorized Jacobians but as linear
+operators on matrices.
+
+\subsubsection{The computational cost of Kronecker products}
+
+One must be cautious about using Kronecker products as a \emph{computational}
+tool, rather than as more of a \emph{conceptual} tool, because they
+can easily cause the computational cost of matrix problems to explode
+far beyond what is necessary.
+
+Suppose that $A$, $B$, and $C$ are all $m\times m$ matrices. The
+cost of multiplying two $m\times m$ matrices (by the usual methods)
+scales proportional to $\sim m^{3}$, what the computer scientists
+call $\Theta(m^{3})$ ``complexity.'' Hence, the cost of the linear
+operation $C\mapsto BCA^{T}$ scales as $\sim m^{3}$ (two $m\times m$ multiplications).
+However, if we instead compute the \emph{same answer} via $\vecm(BCA^{T})=(A\otimes B)\vecm C$,
+then we must:
+\begin{enumerate}
+\item Form the $m^{2}\times m^{2}$ matrix $A\otimes B$. This requires
+$m^{4}$ multiplications (all entries of $A$ by all entries of $B$),
+and $\sim m^{4}$ memory storage. (Compare to $\sim m^{2}$ memory
+to store $A$ or $B$. If $m$ is 1000, this is a \emph{million} times
+more storage, terabytes instead of megabytes!)
+\item Multiply $A\otimes B$ by the vector $\vecm C$ of $m^{2}$ entries.
+Multiplying an $n\times n$ matrix by a vector requires $\sim n^{2}$
+operations, and here $n=m^{2}$, so this is again $\sim m^{4}$ arithmetic
+operations.
+\end{enumerate}
+So, instead of $\sim m^{3}$ operations and $\sim m^{2}$ storage
+to compute $BCA^{T}$, using $(A\otimes B)\vecm C$ requires $\sim m^{4}$
+operations and $\sim m^{4}$ storage, vastly worse! Essentially, this
+is because $A\otimes B$ has a lot of structure that we are not exploiting
+(it is a \emph{very special} $m^{2}\times m^{2}$ matrix). 
+
+There are many examples of this nature. Another famous one involves
+solving the linear \emph{matrix} equations 
+\[
+AX+XB=C
+\]
+for an unknown matrix $X$, given $A,B,C$, where all of these are
+$m\times m$ matrices. This is called a ``Sylvester equation.'' These
+are \emph{linear }equations in our unknown $X$, and we can convert them
+to an ordinary system of $m^{2}$ linear equations by Kronecker products:
+\[
+\vecm(AX+XB)=(\Id\otimes A+B^{T}\otimes\Id)\vecm X=\vecm C,
+\]
+which you can then solve for the $m^{2}$ unknowns $\vecm X$ using
+Gaussian elimination. But the cost of solving an $m^{2}\times m^{2}$
+system of equations by Gaussian elimination is $\sim (m^2)^3 = m^{6}$.
+It turns out, however, that there are clever algorithms to solve $AX+XB=C$
+in only $\sim m^{3}$ operations (with $\sim m^{2}$ memory)---for $m=1000$, this saves a factor of $\sim m^3 = {10}^9$ (a \emph{billion}) in computational effort.
+
+(Kronecker products can be a more practical computational tool for \emph{sparse} matrices: matrices that are mostly zero, e.g.~having only a few nonzero entries per row.  That's because the Kronecker product of two sparse matrices is also sparse, avoiding the huge storage requirements for Kronecker products of non-sparse ``dense'' matrices. This can be a convenient way to assemble large sparse systems of equations for things like multidimensional PDEs.)

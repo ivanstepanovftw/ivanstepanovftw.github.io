@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ω}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{n}{p}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{log}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{ω}\PYG{p}{)}
+\PYG{n}{sample\PYGZus{}X2}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{generic}\PYG{+w}{ }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{with}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{n}{method}\PYG{p}{)}
+
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{c}{\PYGZsh{} rand() samples a uniform random number in [0,1)}
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rand}\PYG{p}{())}
+\PYG{n}{sample\PYGZus{}X2}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{generic}\PYG{+w}{ }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{with}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{n}{methods}\PYG{p}{)}
+
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{l+m+mf}{8.380816941818618}
+
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{l+m+mf}{2.073939134369733}
+
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{l+m+mf}{29.94586208847568}
+
+\PYG{n}{julia}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X2}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{l+m+mf}{23.91658360124792}
+\end{Verbatim}

@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{using}\PYG{+w}{ }\PYG{n}{Distributions}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{rand}\PYG{p}{(}\PYG{n}{Exponential}\PYG{p}{(}\PYG{n}{p}\PYG{p}{))}
+\PYG{g+go}{sample\PYGZus{}X (generic function with 1 method)}
+\end{Verbatim}

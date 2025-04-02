@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{49}
+\PYG{g+go}{49}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{Babylonian}\PYG{p}{(}\PYG{n}{D}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{))}
+\PYG{g+go}{D(7.0, 0.07142857142857142)}
+\end{Verbatim}

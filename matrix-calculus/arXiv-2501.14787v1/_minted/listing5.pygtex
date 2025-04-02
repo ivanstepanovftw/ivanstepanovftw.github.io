@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{Base}\PYG{o}{.}\PYG{n}{convert}\PYG{p}{(}\PYG{o}{::}\PYG{k+kt}{Type}\PYG{p}{\PYGZob{}}\PYG{k+kt}{D}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{r}\PYG{o}{::}\PYG{k+kt}{Real}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{D}\PYG{p}{(}\PYG{n}{r}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{+w}{       }\PYG{n}{Base}\PYG{o}{.}\PYG{n}{promote\PYGZus{}rule}\PYG{p}{(}\PYG{o}{::}\PYG{k+kt}{Type}\PYG{p}{\PYGZob{}}\PYG{k+kt}{D}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{o}{::}\PYG{k+kt}{Type}\PYG{p}{\PYGZob{}}\PYG{o}{\PYGZlt{}:}\PYG{k+kt}{Real}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{D}
+\end{Verbatim}

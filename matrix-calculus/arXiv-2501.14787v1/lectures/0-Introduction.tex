@@ -1,0 +1,16 @@
+These notes are based on the class as it was run for the second time in January 2023, taught by Professors Alan Edelman and Steven~G.~Johnson at MIT. The previous version of this course, run in January 2022, can be found \href{https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2022/}{on OCW here}. 
+
+Both Professors Edelman and Johnson use he/him pronouns and are in the Department of Mathematics at MIT; Prof.~Edelman is also a Professor in the MIT Computer Science and Artificial Intelligence Laboratory (CSAIL) running the Julia lab, while Prof.~Johnson is also a Professor in the Department of Physics. 
+
+Here is a description of the course.:
+\begin{quote}
+    We all know that typical  calculus course sequences 
+    begin with  univariate and vector calculus, respectively. Modern applications such as machine learning and large-scale optimization require the next big step, ``matrix calculus'' and calculus on arbitrary vector spaces.
+
+% Derivatives are seen as the "easy" part of learning calculus: a few simple rules, and every function's derivatives are at your fingertips!  But these basic techniques can turn bewildering if you are faced with much more complicated functions like a matrix determinant (what is a derivative "with respect to a matrix" anyway?), the solution of a differential equation, or a huge engineering calculation like a fluid simulation or a neural-network model. And needing such derivatives is increasingly common thanks to the growing prevalence of machine learning, large-scale optimization, and many other problems demanding sensitivity analysis of complex calculations.
+% Although many techniques for generalizing and applying derivatives are known, that knowledge is currently scattered across a diverse literature, and requires students to put aside their memorized rules and re-learn what a derivative really is: linearization.  In 2022 and 2023, Alan and I put together a one-month, 16-hour "Matrix Calculus" course at MIT that refocuses differential calculus on the linear algebra at its heart, and we hope to remind you that derivatives are not a subject that is "done" after your second semester of calculus.
+
+
+This class covers a coherent approach to matrix calculus showing techniques that allow you to think of a matrix holistically (not just as an array of scalars), generalize and compute derivatives of important matrix factorizations and many other complicated-looking operations, and understand how differentiation formulas must be re-imagined in large-scale computing. We will discuss ``reverse'' (``adjoint'', ``backpropagation'') differentiation and how modern automatic differentiation is more computer science than calculus (it is neither symbolic formulas nor finite differences).
+\end{quote}
+The class involved numerous example numerical computations using the Julia language, which you can install on your own computer following \href{https://github.com/mitmath/julia-mit#installing-julia-and-ijulia-on-your-own-computer}{these instructions}. The material for this class is also located on GitHub at  \url{https://github.com/mitmath/matrixcalc}.

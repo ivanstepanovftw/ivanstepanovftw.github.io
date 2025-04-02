@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{p}{(}\PYG{o}{√}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.5}\PYG{o}{/√}\PYG{n}{x}\PYG{p}{)}
+\PYG{g+go}{(7.0, 0.07142857142857142)}
+\end{Verbatim}

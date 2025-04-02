@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{g+go}{1.7849785709142214}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{g+go}{4.435847397169775}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{sample\PYGZus{}X}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}
+\PYG{g+go}{0.6823343897949835}
+
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{n}{mean}\PYG{p}{(}\PYG{n}{sample\PYGZus{}X}\PYG{p}{(}\PYG{l+m+mf}{10.0}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{10}\PYG{o}{\PYGZca{}}\PYG{l+m+mi}{9}\PYG{p}{)}\PYG{+w}{ }\PYG{c}{\PYGZsh{} mean = p}
+\PYG{g+go}{9.999930348291866}
+\end{Verbatim}

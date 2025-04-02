@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{julia\PYGZgt{}}\PYG{+w}{ }\PYG{k}{struct} \PYG{k+kt}{D}\PYG{+w}{ }\PYG{o}{\PYGZlt{}:}\PYG{+w}{ }\PYG{k+kt}{Number}
+\PYG{+w}{           }\PYG{n}{val}\PYG{o}{::}\PYG{k+kt}{Float64}
+\PYG{+w}{           }\PYG{n}{deriv}\PYG{o}{::}\PYG{k+kt}{Float64}
+\PYG{+w}{       }\PYG{k}{end}
+\end{Verbatim}

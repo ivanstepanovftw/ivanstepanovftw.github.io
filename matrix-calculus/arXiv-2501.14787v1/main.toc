@@ -1,0 +1,95 @@
+\contentsline {section}{Introduction}{4}{Doc-Start}%
+\contentsline {section}{\numberline {1}Overview and Motivation}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Applications}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}First Derivatives}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Intro: Matrix and Vector Product Rule}{8}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Derivatives as Linear Operators}{9}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Revisiting single-variable calculus}{9}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Linear operators}{10}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Directional derivatives}{12}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}Revisiting multivariable calculus, Part 1: Scalar-valued functions}{12}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Revisiting multivariable calculus, Part 2: Vector-valued functions}{14}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}The Chain Rule}{16}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Cost of Matrix Multiplication}{17}{subsubsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.6}Beyond Multi-Variable Derivatives}{18}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Jacobians of Matrix Functions}{20}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Derivatives of matrix functions: Linear operators}{20}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}A simple example: The two-by-two matrix-square function}{21}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}The matrix-squaring four-by-four Jacobian matrix}{23}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Kronecker Products}{23}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Key Kronecker-product identity}{25}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}The Jacobian in Kronecker-product notation}{26}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}The computational cost of Kronecker products}{27}{subsubsection.3.3.3}%
+\contentsline {section}{\numberline {4}Finite-Difference Approximations}{29}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Why compute derivatives approximately instead of exactly?}{29}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Finite-Difference Approximations: Easy Version}{29}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Example: Matrix squaring}{30}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Accuracy of Finite Differences}{31}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Order of accuracy}{32}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Roundoff error}{32}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Other finite-difference methods}{32}{subsection.4.7}%
+\contentsline {section}{\numberline {5}Derivatives in General Vector Spaces}{34}{section.5}%
+\contentsline {subsection}{\numberline {5.1}A Simple Matrix Dot Product and Norm}{34}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Derivatives, Norms, and Banach spaces}{37}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Nonlinear Root-Finding, Optimization, and Adjoint Differentiation}{39}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Newton's Method}{39}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Scalar Functions}{39}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Multidimensional Functions}{39}{subsubsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.2}Optimization}{40}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Nonlinear Optimization}{40}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Engineering/Physical Optimization}{42}{subsubsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Reverse-mode ``Adjoint'' Differentiation}{42}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Nonlinear equations}{44}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Adjoint methods and AD}{44}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Adjoint-method example}{44}{subsubsection.6.3.3}%
+\contentsline {section}{\numberline {7}Derivative of Matrix Determinant and Inverse}{47}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Two Derivations}{47}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Applications}{48}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Characteristic Polynomial}{48}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}The Logarithmic Derivative}{48}{subsubsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.3}Jacobian of the Inverse}{49}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Forward and Reverse-Mode Automatic Differentiation}{50}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Automatic Differentiation via Dual Numbers}{50}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Example: Babylonian square root}{50}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Easy forward-mode AD}{51}{subsubsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.3}Dual numbers}{53}{subsubsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.2}Naive symbolic differentiation}{54}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Automatic Differentiation via Computational Graphs}{56}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Reverse Mode Automatic Differentiation on Graphs}{60}{subsubsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.4}Forward- vs. Reverse-mode Differentiation}{61}{subsection.8.4}%
+\contentsline {subsubsection}{\numberline {8.4.1}Forward-over-reverse mode: Second derivatives}{62}{subsubsection.8.4.1}%
+\contentsline {section}{\numberline {9}Differentiating ODE solutions}{65}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Ordinary differential equations (ODEs)}{65}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Sensitivity analysis of ODE solutions}{66}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}Forward sensitivity analysis of ODEs}{68}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Reverse/adjoint sensitivity analysis of ODEs}{69}{subsubsection.9.2.2}%
+\contentsline {subsection}{\numberline {9.3}Example}{71}{subsection.9.3}%
+\contentsline {subsubsection}{\numberline {9.3.1}Forward mode}{72}{subsubsection.9.3.1}%
+\contentsline {subsubsection}{\numberline {9.3.2}Reverse mode}{72}{subsubsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.4}Further reading}{73}{subsection.9.4}%
+\contentsline {section}{\numberline {10}Calculus of Variations}{74}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Functionals: Mapping functions to scalars}{74}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Inner products of functions}{74}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Example: Minimizing arc length}{76}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Euler--Lagrange equations}{77}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Derivatives of Random Functions}{79}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Introduction}{79}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Stochastic programs}{79}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Stochastic differentials and the reparameterization trick}{81}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Handling discrete randomness}{84}{subsection.11.4}%
+\contentsline {section}{\numberline {12}Second Derivatives, Bilinear Maps, and Hessian Matrices}{87}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Hessian matrices of scalar-valued functions}{87}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}General second derivatives: Bilinear maps}{88}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Generalized quadratic approximation}{92}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Hessians and optimization}{93}{subsection.12.4}%
+\contentsline {subsubsection}{\numberline {12.4.1}Newton-like methods}{93}{subsubsection.12.4.1}%
+\contentsline {subsubsection}{\numberline {12.4.2}Computing Hessians}{93}{subsubsection.12.4.2}%
+\contentsline {subsubsection}{\numberline {12.4.3}Minima, maxima, and saddle points}{94}{subsubsection.12.4.3}%
+\contentsline {subsection}{\numberline {12.5}Further Reading}{95}{subsection.12.5}%
+\contentsline {section}{\numberline {13}Derivatives of Eigenproblems}{96}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Differentiating on the Unit Sphere}{96}{subsection.13.1}%
+\contentsline {subsubsection}{\numberline {13.1.1}Special Case: A Circle}{96}{subsubsection.13.1.1}%
+\contentsline {subsubsection}{\numberline {13.1.2}On the Sphere}{96}{subsubsection.13.1.2}%
+\contentsline {subsection}{\numberline {13.2}Differentiating on Orthogonal Matrices}{97}{subsection.13.2}%
+\contentsline {subsubsection}{\numberline {13.2.1}Differentiating the Symmetric Eigendecomposition}{98}{subsubsection.13.2.1}%
+\contentsline {section}{\numberline {14}Where We Go From Here}{100}{section.14}%
