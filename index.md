@@ -11,24 +11,10 @@ title: Главная
 
 $y=wx+b$
 
-## 4
-asd$$y=wx+b$$
+$\R^n$
 
-## 3
-asd $$y=wx+b$$
+$\mathbb{R}^n$
 
-## 2
-asd $$y=wx+b
-$$
-
-## 1
-asd$$y=wx+b$$asd
-
-asd $$y=wx+b$$asd
-
-asd$$y=wx+b$$ asd
-
-asd $$y=wx+b$$ asd
 
 ## 0
 $$
