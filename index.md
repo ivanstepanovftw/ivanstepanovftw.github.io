@@ -12,20 +12,23 @@ title: Главная
 $y=wx+b$
 
 ## 4
-$$
-y=wx+b
-$$
+asd$$y=wx+b$$
 
 ## 3
-$$y=wx+b$$
+asd $$y=wx+b$$
 
 ## 2
-$$y=wx+b
+asd $$y=wx+b
 $$
 
 ## 1
-$$
-y=wx+b$$
+asd$$y=wx+b$$asd
+
+asd $$y=wx+b$$asd
+
+asd$$y=wx+b$$ asd
+
+asd $$y=wx+b$$ asd
 
 ## 0
 $$
