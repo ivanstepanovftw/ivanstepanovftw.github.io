@@ -1,3 +1,4 @@
 project:
   title: "ivanstepanovftw"
+  type: website
   output-dir: docs
