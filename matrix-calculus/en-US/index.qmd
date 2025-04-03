@@ -12,6 +12,7 @@ title: |
 ---
 
 {% raw %}
+
 # Introduction {#introduction .unnumbered}
 
 These notes are based on the class as it was run for the second time in January 2023, taught by Professors Alan Edelman and Steven G. Johnson at MIT. The previous version of this course, run in January 2022, can be found [on OCW here](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2022/).
