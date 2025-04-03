@@ -381,34 +381,6 @@
     "objectID": "index.html#section",
     "href": "index.html#section",
     "title": "Главная",
-    "section": "4",
-    "text": "4\nasdy=wx+by=wx+b"
-  },
-  {
-    "objectID": "index.html#section-1",
-    "href": "index.html#section-1",
-    "title": "Главная",
-    "section": "3",
-    "text": "3\nasd y=wx+by=wx+b"
-  },
-  {
-    "objectID": "index.html#section-2",
-    "href": "index.html#section-2",
-    "title": "Главная",
-    "section": "2",
-    "text": "2\nasd y=wx+by=wx+b"
-  },
-  {
-    "objectID": "index.html#section-3",
-    "href": "index.html#section-3",
-    "title": "Главная",
-    "section": "1",
-    "text": "1\nasdy=wx+by=wx+basd\nasd y=wx+by=wx+basd\nasdy=wx+by=wx+b asd\nasd y=wx+by=wx+b asd"
-  },
-  {
-    "objectID": "index.html#section-4",
-    "href": "index.html#section-4",
-    "title": "Главная",
     "section": "0",
     "text": "0\nA=[a11a12a13a21a22a23a31a32a33]\nA = \\begin{bmatrix}\na_{11} & a_{12} & a_{13} \\\\\na_{21} & a_{22} & a_{23} \\\\\na_{31} & a_{32} & a_{33}\n\\end{bmatrix}\n\n{\n    \"a\": \"b\"\n    // comment\n}"
   },
@@ -418,55 +390,6 @@
     "title": "Главная",
     "section": "Введение",
     "text": "Введение\n\nТрансформеры используют FFN после механизма самовнимания."
-  },
-  {
-    "objectID": "iindex.html",
-    "href": "iindex.html",
-    "title": "Главная",
-    "section": "",
-    "text": "Это мой сайт, написанный в Markdown.\ny=wx+by=wx+b\n\n\ny=wx+b\ny=wx+b\n\n\n\n\ny=wx+by=wx+b\n\n\n\ny=wx+by=wx+b\n\n\n\n\ny=wx+b\ny=wx+b\n\n\n\nA=[a11a12a13a21a22a23a31a32a33]\nA = \\begin{bmatrix}\na_{11} & a_{12} & a_{13} \\\\\na_{21} & a_{22} & a_{23} \\\\\na_{31} & a_{32} & a_{33}\n\\end{bmatrix}\n\n{\n    \"a\": \"b\"\n    // comment\n}\n\n\n\n\n\n\n\n\n\nТрансформеры используют FFN после механизма самовнимания."
-  },
-  {
-    "objectID": "iindex.html#section",
-    "href": "iindex.html#section",
-    "title": "Главная",
-    "section": "",
-    "text": "y=wx+b\ny=wx+b"
-  },
-  {
-    "objectID": "iindex.html#section-1",
-    "href": "iindex.html#section-1",
-    "title": "Главная",
-    "section": "",
-    "text": "y=wx+by=wx+b"
-  },
-  {
-    "objectID": "iindex.html#section-2",
-    "href": "iindex.html#section-2",
-    "title": "Главная",
-    "section": "",
-    "text": "y=wx+by=wx+b"
-  },
-  {
-    "objectID": "iindex.html#section-3",
-    "href": "iindex.html#section-3",
-    "title": "Главная",
-    "section": "",
-    "text": "y=wx+b\ny=wx+b"
-  },
-  {
-    "objectID": "iindex.html#section-4",
-    "href": "iindex.html#section-4",
-    "title": "Главная",
-    "section": "",
-    "text": "A=[a11a12a13a21a22a23a31a32a33]\nA = \\begin{bmatrix}\na_{11} & a_{12} & a_{13} \\\\\na_{21} & a_{22} & a_{23} \\\\\na_{31} & a_{32} & a_{33}\n\\end{bmatrix}\n\n{\n    \"a\": \"b\"\n    // comment\n}"
-  },
-  {
-    "objectID": "iindex.html#введение",
-    "href": "iindex.html#введение",
-    "title": "Главная",
-    "section": "",
-    "text": "Трансформеры используют FFN после механизма самовнимания."
   },
   {
     "objectID": "matrix-calculus/arXiv-2501.14787v1/figures/matrixcalc-ODE-fig.html",
