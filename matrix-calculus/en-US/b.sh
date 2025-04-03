@@ -15,13 +15,14 @@ index_filename="index.qmd"
   set -- "$@" --embed-resources=true
 #  set -- "$@" -t markdown
 #  set -- "$@" -t markdown_mmd
+#  set -- "$@" -t commonmark_x
   set -- "$@" -t commonmark_x
   set -- "$@" -o "$temp/$index_filename" --extract-media="$temp"
   pandoc main.tex "$@" || exit 1
+
   # Add '{% raw %}' after frontmatter and '{% endraw %}' at the end
-  perl -i -pe 'if (/^---$/) { $count++; $_ .= "\n{% raw %}" if $count==2 }' "$temp/$index_filename"
-  #sed -i -e '1s/^/{% raw %}\n/' "$temp/$index_filename"
-  sed -i -e '$s/$/\n{% endraw %}/' "$temp/$index_filename"
+  #perl -i -pe 'if (/^---$/) { $count++; $_ .= "{% raw %}\n" if $count==2 }' "$temp/$index_filename"
+  #sed -i -e '$s/$/\n\n{% endraw %}/' "$temp/$index_filename"
 ) || exit 1
 
 convert_asset() {
