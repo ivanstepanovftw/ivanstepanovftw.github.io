@@ -12,7 +12,19 @@ kramdown:
     preview: false
 
 plugins:
-  - jekyll-relative-links
+  - jekyll-header-id
+  - jekyll-inline-svg
+  - jekyll-target-blank
+
+# Настройки для jekyll-target-blank (все внешние ссылки)
+target-blank:
+  enabled: true
+  rel: ["noopener"]
+  exclude: ["example.com"]  # если нужно исключить домены (опционально)
+
+# inline-svg можно использовать как {% inline_svg path/to.svg %}
+inline_svg:
+  optimize: true
 
 relative_links:
   enabled: true
