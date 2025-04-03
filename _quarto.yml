@@ -2,3 +2,8 @@ project:
   title: "ivanstepanovftw"
   type: website
   output-dir: docs
+
+format:
+  html:
+    toc: true
+    html-math-method: mathml
