@@ -1,18 +1,16 @@
 ---
 author:
 - |
-  **Lecturers: Alan Edelman and Steven G. Johnson**\
+  **Lecturers: Alan Edelman and Steven G. Johnson**  
   Notes by Paige Bright, Alan Edelman, and Steven G. Johnson
 date: Based on MIT course 18.S096 (now 18.063) in IAP 2023
 lang: en-US
-math: true
 title: |
-  Matrix Calculus\
+  Matrix Calculus  
   (for Machine Learning and Beyond)
 ---
 
 {% raw %}
-
 # Introduction {#introduction .unnumbered}
 
 These notes are based on the class as it was run for the second time in January 2023, taught by Professors Alan Edelman and Steven G. Johnson at MIT. The previous version of this course, run in January 2022, can be found [on OCW here](https://ocw.mit.edu/courses/18-s096-matrix-calculus-for-machine-learning-and-beyond-january-iap-2022/).
@@ -101,29 +99,41 @@ The notion of linearizing your function will conceptually carry over as we defin
 than one number.
 Of course, this means that the derivative will have a different "shape" than a single number. Here is a table on the *shape* of the first derivative. The inputs of the function are given on the left hand side of the table, and the outputs of the function are given across the top.
 
-+----------------+----------------+----------------+----------------+
-| 2-4            | scalar         | vector         | matrix         |
-|                |                |                |                |
-| input          |                |                |                |
-| $\downarrow$   |                |                |                |
-| and output     |                |                |                |
-| $\rightarrow$  |                |                |                |
-+:===============+:===============+:===============+:===============+
-| scalar         | scalar         | vector (for    | matrix         |
-|                |                | instance,      |                |
-|                |                | velocity)      |                |
-+----------------+----------------+----------------+----------------+
-| vector         | gradient =     | matrix (called | higher order   |
-|                | (column)       | the Jacobian   | array          |
-|                | vector         | matrix)        |                |
-+----------------+----------------+----------------+----------------+
-| matrix         | matrix         | higher order   | higher order   |
-|                |                | array          | array          |
-+----------------+----------------+----------------+----------------+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><p><span>2-4</span></p>
+<p>input <span class="math inline">↓</span> and output <span class="math inline">→</span></p></th>
+<th style="text-align: left;">scalar</th>
+<th style="text-align: left;">vector</th>
+<th style="text-align: left;">matrix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">scalar</td>
+<td style="text-align: left;">scalar</td>
+<td style="text-align: left;">vector (for instance, velocity)</td>
+<td style="text-align: left;">matrix</td>
+</tr>
+<tr>
+<td style="text-align: left;">vector</td>
+<td style="text-align: left;">gradient = (column) vector</td>
+<td style="text-align: left;">matrix (called the Jacobian matrix)</td>
+<td style="text-align: left;">higher order array</td>
+</tr>
+<tr>
+<td style="text-align: left;">matrix</td>
+<td style="text-align: left;">matrix</td>
+<td style="text-align: left;">higher order array</td>
+<td style="text-align: left;">higher order array</td>
+</tr>
+</tbody>
+</table>
 
 You will ultimately learn how to do any of these in great detail eventually in this class! The purpose of this table is to plant the notion of differentials as linearization. Let's look at an example.
 
-::: example
+::: {.example}
 Let $f(x) = x^T x$, where $x$ is a $2\times 1$ matrix and the output is thus a $1\times 1$ matrix.
 Confirm that $2x_0^T dx$
 is indeed the differential of $f$ at $x_0 = \begin{pmatrix}  3 & 4\end{pmatrix}^T$.
@@ -143,7 +153,7 @@ As we will see right now, the $2x_0^Tdx$ didn't come from nowhere!
 
 For matrices, we in fact still have a product rule! We will discuss this in much more detail in later chapters, but let's begin here with a small taste.
 
-::: theorem
+::: {.theorem}
 Let $A,B$ be two matrices. Then, we have the differential product rule for $AB$:
 $$d(AB) = (dA)B + A(dB).$$
 By the differential of the matrix $A$, we think of it as a small (unconstrained) change in the matrix $A.$ Later, constraints may be places on the allowed perturbations.
@@ -156,11 +166,11 @@ $$d(x^Tx) = (dx^T)x + x^T (dx).$$
 However, notice that this is a dot product, and dot products commute (since $\sum a_i \cdot b_i = \sum b_i \cdot a_i$), we have that
 $$d(x^T x) = (2x)^T dx.$$
 
-::: remark
+::: {.remark}
 The way the product rule works for vectors as matrices is that transposes "go for the ride." See the next example below.
 :::
 
-::: example
+::: {.example}
 By the product rule. we have
 
 1.  $d(u^Tv) = (du)^T v + u^T (dv) = v^T du + u^T dv$ since dot products commute.
@@ -168,7 +178,7 @@ By the product rule. we have
 2.  $d(uv^T) = (du )v^T + u( dv)^T.$
 :::
 
-::: remark
+::: {.remark}
 The way to prove these sorts of statements can be seen in Section [2](#sec1S){reference-type="ref" reference="sec1S"}.
 :::
 
@@ -178,13 +188,16 @@ We are now going to revisit the notion of a derivative in a way that we can gene
 
 ## Revisiting single-variable calculus
 
-![The essence of a derivative is *linearization*: predicting a small change $\delta f$ in the output $f(x)$ from a small change $\delta x$ in the input $x$, to *first order* in $\delta x$.](figures/derivative-linearization.pdf.svg){#fig:derivative-linearization width="80%"}
+<figure id="fig:derivative-linearization">
+<embed src="figures/derivative-linearization.pdf.svg" style="width:80.0%" />
+<figcaption>The essence of a derivative is <em>linearization</em>: predicting a small change <span class="math inline"><em>δ</em><em>f</em></span> in the output <span class="math inline"><em>f</em>(<em>x</em>)</span> from a small change <span class="math inline"><em>δ</em><em>x</em></span> in the input <span class="math inline"><em>x</em></span>, to <em>first order</em> in <span class="math inline"><em>δ</em><em>x</em></span>.</figcaption>
+</figure>
 
 In a first-semester single-variable calculus course (like 18.01 at MIT), the derivative $f'(x)$ is introduced as the slope of the tangent line at the point $(x,f(x))$, which can also be viewed as a *linear approximation* of $f$ near $x$. In particular, as depicted in Fig. [1](#fig:derivative-linearization){reference-type="ref" reference="fig:derivative-linearization"}, this is equivalent to a prediction of the *change $\delta f$ in the "output"* of $f(x)$ from a small *change $\delta x$ in the "input"* to first order (*linear*) in $\delta x$:
 $$\delta f = f(x+\delta x) - f(x) =  f'(x) \, \delta x  + \underbrace{(\text{higher-order terms})}_{o(\delta x)}.$$
 We can more precisely express these higher-order terms using asymptotic "little-o" notation "$o(\delta x)$", which denotes any function whose magnitude shrinks much faster than $|\delta x|$ as $\delta x \to 0$, so that for sufficiently small $\delta x$ it is negligible compared to the linear $f'(x) \, \delta x$ term. (Variants of this notation are commonly used in computer science, and there is a formal definition that we omit here.[^1]) Examples of such higher-order terms include $(\delta x)^2$, $(\delta x)^3$, $(\delta x)^{1.001}$, and $(\delta x)/\log(\delta x)$.
 
-::: remark
+::: {.remark}
 Here, $\delta x$ is *not* an infinitesimal but rather a small number. Note that our symbol "$\delta$" (a Greek lowercase "delta") is *not* the same as the symbol "$\partial$" commonly used to denote partial derivatives.
 :::
 
@@ -204,7 +217,7 @@ As above, you should think of the differential notation $dx$ as representing an 
 
 This definition will allow us to extend differentiation to *arbitrary vector spaces* of inputs $x$ and outputs $f(x)$. (More technically, we will require vector spaces with a norm $\Vert x \Vert$, called "Banach spaces," in order to precisely define the $o(\delta x)$ terms that are dropped. We will come back to the subject of Banach spaces later.)
 
-::: recall
+::: {.recall}
 Loosely, a vector space (over $\R$) is a set of elements in which addition and subtraction between elements is defined, along with multiplication by real scalars. For instance, while it does not make sense to multiply arbitrary vectors in $\R^n$, we can certainly add them together, and we can certainly scale the vectors by a constant factor.
 :::
 
@@ -214,7 +227,7 @@ Some examples of vector spaces include:
 
 - $C^0(\R^n)$, the set of continuous functions over $\R^n$, with addition defined pointwise.
 
-::: recall
+::: {.recall}
 Recall that a linear operator is a map $L$ from a vector $v$ in vector space $V$ to a vector $L[v]$ (sometimes denoted simply $Lv$) in some other vector space. Specifically, $L$ is linear if
 $$L[v_1+v_2] = Lv_1 + Lv_2 \text{~~and~~} L[\alpha v] = \alpha L[v]$$
 for scalars $\alpha \in \mathbb{R}$.
@@ -222,24 +235,25 @@ for scalars $\alpha \in \mathbb{R}$.
 *Remark*: In this course, $f'$ is a map that takes in an $x$ and spits out a linear operator $f'(x)$ (the **derivative** of $f$ at $x$). Furthermore, $f'(x)$ is a linear map that takes in an input direction $v$ and gives an output vector $f'(x)[v]$ (which we will later interpret as a directional derivative, see Sec. [2.2.1](#sec:directional){reference-type="ref" reference="sec:directional"}). When the direction $v$ is an infinitesimal $d x$, the output $f'(x)[dx] = df$ is the **differential** of $f$ (the corresponding infinitesimal change in $f$).
 :::
 
-::: notation
+::: {.notation}
 There are multiple notations for derivatives in common use, along with multiple related concepts of derivative, differentiation, and differentials. In the table below, we summarize several of these notations, and put $\boxed{\mathrm{boxes}}$ around the notations adopted for this course:
 
-  name                 notations                                                             remark
-  -------------------- --------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  derivative           $\boxed{f'}$, also $\frac{df}{dx}$, $Df$, $f_{x}$, $\partial_{x}f$,   linear operator $f'(x)$ that maps a small change $dx$ in the input to a small
-                       ...                                                                   change ${df=f'(x)[dx]}$ in the output
-                                                                                             
-                                                                                             In single-variable calculus, this linear operator can be represented by a *single number*, the "slope," e.g. if $f(x) = \sin(x)$ then $f'(x) = \cos(x)$ is the number that we multiply by $dx$ to get $dy = \cos(x) dx$. In multi-variable calculus, the linear operator $f'(x)$ can be represented by a *matrix*, the **Jacobian** $J$ (see Sec. [3](#sec:kronecker){reference-type="ref" reference="sec:kronecker"}), so that $df = f'(x)[dx] = J\, dx$. But we will see that it is not always convenient to express $f'$ as a matrix, even if we can.
-  differentiation      $\boxed{^{\prime}}$, $\frac{d}{dx}$, $D$, ...                         linear operator that maps a function $f$ to its derivative $f'$
-  difference           $\boxed{\delta x}$ and $\boxed{\delta f} = f(x+\delta x) - f(x)$      small (but *not* infinitesimal) change in the input $x$ and output $f$ (depending implicitly on $x$ and $\delta x$), respectively:
-                                                                                             an element of a vector space, *not* a linear operator
-  differential         $\boxed{d x}$ and $\boxed{d f} = f(x+dx) - f(x)$                      arbitrarily small ("infinitesimal"[^2] --- we drop higher-order terms) change in the input $x$ and output $f$, respectively:
-                                                                                             an element of a vector space, *not* a linear operator
-  gradient             $\boxed{\nabla f}$                                                    the vector whose inner product $df = \langle \nabla f, dx \rangle$ with a small change $dx$ in the input gives the small change $df$ in the output. The "transpose of the derivative" $\nabla f = (f')^T$. (See Sec. [2.3](#sec:multivarPart1){reference-type="ref" reference="sec:multivarPart1"}.)
-  partial derivative   $\boxed{\frac{\partial f}{\partial x}}$, $f_{x}$, $\partial_{x}f$     linear operator that maps a small change $dx$ in a *single argument*
-                                                                                             of a multi-argument function to the corresponding change in output,
-                                                                                             e.g. for $f(x,y)$ we have $df=\frac{\partial f}{\partial x}[dx]+\frac{\partial f}{\partial y}[dy]$.
+| name | notations | remark |
+|:---|:---|:---|
+| derivative | $\boxed{f'}$, also $\frac{df}{dx}$, $Df$, $f_{x}$, $\partial_{x}f$,
+... | linear operator $f'(x)$ that maps a small change $dx$ in the input to a small
+change ${df=f'(x)[dx]}$ in the output |
+|  |  |  |
+|  |  | In single-variable calculus, this linear operator can be represented by a *single number*, the "slope," e.g. if $f(x) = \sin(x)$ then $f'(x) = \cos(x)$ is the number that we multiply by $dx$ to get $dy = \cos(x) dx$. In multi-variable calculus, the linear operator $f'(x)$ can be represented by a *matrix*, the **Jacobian** $J$ (see Sec. [3](#sec:kronecker){reference-type="ref" reference="sec:kronecker"}), so that $df = f'(x)[dx] = J\, dx$. But we will see that it is not always convenient to express $f'$ as a matrix, even if we can. |
+| differentiation | $\boxed{^{\prime}}$, $\frac{d}{dx}$, $D$, ... | linear operator that maps a function $f$ to its derivative $f'$ |
+| difference | $\boxed{\delta x}$ and $\boxed{\delta f} = f(x+\delta x) - f(x)$ | small (but *not* infinitesimal) change in the input $x$ and output $f$ (depending implicitly on $x$ and $\delta x$), respectively:
+an element of a vector space, *not* a linear operator |
+| differential | $\boxed{d x}$ and $\boxed{d f} = f(x+dx) - f(x)$ | arbitrarily small ("infinitesimal"[^2] --- we drop higher-order terms) change in the input $x$ and output $f$, respectively:
+an element of a vector space, *not* a linear operator |
+| gradient | $\boxed{\nabla f}$ | the vector whose inner product $df = \langle \nabla f, dx \rangle$ with a small change $dx$ in the input gives the small change $df$ in the output. The "transpose of the derivative" $\nabla f = (f')^T$. (See Sec. [2.3](#sec:multivarPart1){reference-type="ref" reference="sec:multivarPart1"}.) |
+| partial derivative | $\boxed{\frac{\partial f}{\partial x}}$, $f_{x}$, $\partial_{x}f$ | linear operator that maps a small change $dx$ in a *single argument*
+of a multi-argument function to the corresponding change in output,
+e.g. for $f(x,y)$ we have $df=\frac{\partial f}{\partial x}[dx]+\frac{\partial f}{\partial y}[dy]$. |
 :::
 
 Some examples of linear operators include
@@ -264,7 +278,10 @@ It is *exactly equivalent* to our $f'(x)$ from before! (We can also see this as 
 
 ## Revisiting multivariable calculus, Part 1: Scalar-valued functions {#sec:multivarPart1}
 
-![For a real-valued $f(x)$, the gradient $\nabla f$ is defined so that it corresponds to the "uphill" direction at a point $x$, which is perpendicular to the contours of $f$. Although this may not point exactly towards the nearest local maximum of $f$ (unless the contours are circular), "going uphill" is nevertheless the starting point for many computational-optimization algorithms to search for a maximum.](figures/gradient-uphill.pdf.svg){#fig:gradient-uphill width="100%"}
+<figure id="fig:gradient-uphill">
+<embed src="figures/gradient-uphill.pdf.svg" style="width:100.0%" />
+<figcaption>For a real-valued <span class="math inline"><em>f</em>(<em>x</em>)</span>, the gradient <span class="math inline">∇<em>f</em></span> is defined so that it corresponds to the “uphill” direction at a point <span class="math inline"><em>x</em></span>, which is perpendicular to the contours of <span class="math inline"><em>f</em></span>. Although this may not point exactly towards the nearest local maximum of <span class="math inline"><em>f</em></span> (unless the contours are circular), “going uphill” is nevertheless the starting point for many computational-optimization algorithms to search for a maximum.</figcaption>
+</figure>
 
 Let $f$ be a scalar-valued function, which takes in "column" vectors $x \in \R^n$ and produces a scalar (in $\R$). Then,
 $$df = f(x+ dx) - f(x) = f'(x) [dx] = \text{scalar}.$$
@@ -284,7 +301,7 @@ While a component-wise viewpoint may sometimes be convenient, we want to encoura
 
 Let's look at an example to see how we compute this differential.
 
-::: example
+::: {.example}
 Consider $f(x) = x^T Ax$ where $x\in \R^n$ and $A$ is a square $n\times n$ matrix, and thus $f(x) \in \R$. Compute $df$, $f'(x)$, and $\nabla f$.
 :::
 
@@ -321,7 +338,7 @@ $$df = \begin{pmatrix}
 
 Let's compute an example.
 
-::: example
+::: {.example}
 []{#ex1 label="ex1"}
 Consider the function $f(x) = Ax$ where $A$ is a constant $m\times n$ matrix. Then, by applying the distributive law for matrix--vector products, we have
 $$\begin{aligned}
@@ -353,21 +370,21 @@ Let's now consider some derivative rules.
 
 Let's look at some short examples of how we can apply the product rule nicely.
 
-::: example
+::: {.example}
 []{#ex:Ax label="ex:Ax"}
 Let $f(x) = Ax$ (mapping $\R^n \to \R^m$) where $A$ is a constant $m\times n$ matrix. Then,
 $$df = d(Ax) =  \cancelto{0}{dA} \, x + Adx = Adx \implies f'(x) = A.$$
 We have ${dA} = 0$ here because $A$ does not change when we change $x$.
 :::
 
-::: example
+::: {.example}
 Let $f(x) = x^T A x$ (mapping $\R^n \to \R$). Then,
 $$df = dx^T(Ax) + x^T d(Ax) = \underbrace{dx^T \, Ax}_{=\, x^T A^Tdx} + x^T Adx = x^T(A+A^T)dx  = (\nabla f)^T dx\, ,$$
 and hence $f'(x) = x^T(A + A^T)$. (In the common case where $A$ is symmetric, this simplifies to $f'(x) = 2x^T A$.) Note that here we have applied Example [\[ex:Ax\]](#ex:Ax){reference-type="ref" reference="ex:Ax"} in computing $d(Ax) = A dx$.
 Furthermore, $f$ is a scalar valued function, so we may also obtain the gradient $\nabla f = (A+A^T) x$ as before (which simplifies to $2Ax$ if $A$ is symmetric).
 :::
 
-::: example
+::: {.example}
 Given $x,y\in \R^m$, define
 $$x\mathbin{.*}y = \begin{pmatrix}
         x_1y_1 \\ \vdots \\ x_my_m
@@ -408,7 +425,7 @@ One of the most important rules from differential calculus is the chain rule, be
 
 Let's look more carefully at the *shapes* of these Jacobian matrices in an example where each function maps a column vector to a column vector:
 
-::: example
+::: {.example}
 Let $x\in \R^n$, $h(x) \in \R^p$, and $g(h(x)) \in \R^m$. Then, let $f(x) = g(h(x))$ mapping from $\R^n$ to $\R^m$. The chain rule then states that
 $$f'(x) = g'(h(x)) h'(x),$$
 which makes sense as $g'$ is an $m\times p$ matrix and $h'$ is a $p\times n$ matrix, so that the product gives an $m \times n$ matrix $f'$! However, notice that this is *not* the same as $h'(x) g'(h(x))$ as you cannot (if $n\neq m$) multiply a $p\times n$ and an $m\times p$ matrix together, and even if $n = m$ you will get the wrong answer since they probably won't commute.
@@ -426,13 +443,16 @@ But who cares? Well it turns out that associativity is deeply important. So impo
 
 ### Cost of Matrix Multiplication {#sec:cost-matrix-mult}
 
-![Matrix multiplication is *associative*---that is, $(AB)C = A(BC)$ for all $A,B,C$---but multiplying left-to-right can be much more efficient than right-to-left if the leftmost matrix has only one (or few) rows, as shown here. Correspondingly, the order in which you carry out the chain rule has dramatic consequences for the computational effort required. Left-to-right is known as "reverse mode" or "backpropagation", and is best suited to situations where there are many fewer outputs than inputs.](figures/matrix-mult-assoc.pdf.svg){#fig:matrix-mult-assoc width="80%"}
+<figure id="fig:matrix-mult-assoc">
+<embed src="figures/matrix-mult-assoc.pdf.svg" style="width:80.0%" />
+<figcaption>Matrix multiplication is <em>associative</em>—that is, <span class="math inline">(<em>A</em><em>B</em>)<em>C</em> = <em>A</em>(<em>B</em><em>C</em>)</span> for all <span class="math inline"><em>A</em>, <em>B</em>, <em>C</em></span>—but multiplying left-to-right can be much more efficient than right-to-left if the leftmost matrix has only one (or few) rows, as shown here. Correspondingly, the order in which you carry out the chain rule has dramatic consequences for the computational effort required. Left-to-right is known as “reverse mode” or “backpropagation”, and is best suited to situations where there are many fewer outputs than inputs.</figcaption>
+</figure>
 
 If you multiply a $m\times q$ matrix by a $q\times p$ matrix, you normally do it by computing $mp$ dot products of length $q$ (or some equivalent re-ordering of these operations). To do a dot product of length $q$ requires $q$ multiplications and $q-1$ additions of scalars. Overall, this is approximately $2mpq$ scalar operations in total. In computer science, you would write that this is "$\Theta(mpq)$": the computational effort is *asymptotically proportional* to $mpq$ for large $m,p,q$.
 
 So why does the order of the chain rule matter? Consider the following two examples.
 
-::: example
+::: {.example}
 Suppose you have a lot of inputs $n \gg 1$, and only one output $m=1$, with lots of intermediate values, i.e. $q=p=n$. Then reverse mode (left-to-right) will cost $\Theta(n^2)$ scalar operations while forward mode (right-to-left) would cost $\Theta(n^3)$! This is a huge cost difference, depicted schematically in Fig. [3](#fig:matrix-mult-assoc){reference-type="ref" reference="fig:matrix-mult-assoc"}.
 
 Conversely, suppose you have a lot of outputs $m \gg 1$ and only one input $n=1$, with lots of intermediate values $q=p=m$. Then reverse mode would cost $\Theta(m^3)$ operations but forward mode would be only $\Theta(m^2)$!
@@ -444,7 +464,7 @@ Moral: If you have a lot of inputs and few outputs (the usual case in machine le
 
 Now let's compute some derivatives that go beyond first-year calculus, where the inputs and outputs are in more general vector spaces. For instance, consider the following examples:
 
-::: example
+::: {.example}
 Let $A$ be an $n\times n$ matrix. You could have the following matrix-valued functions. For example:
 
 - $f(A) = A^3$,
@@ -464,7 +484,7 @@ You could also have scalar outputs. For example:
 
 Let's focus on two simpler examples for this lecture.
 
-::: example
+::: {.example}
 Let $f(A) = A^3$ where $A$ is a square matrix. Compute $df$.
 :::
 
@@ -472,7 +492,7 @@ Here, we apply the chain rule one step at a time:
 $$df = dA\, A^2 + A \,dA \, A + A^2 \,dA = f'(A) [dA].$$
 Notice that this is not equal to $3A^2$ (unless $dA$ and $A$ commute, which won't generally be true since $dA$ represents an *arbitrary* small change in $A$). The right-hand side is a linear operator $f'(A)$ acting on $dA$, but it is not so easy to interpret it as simply a single "Jacobian" matrix multiplying $dA$!
 
-::: example
+::: {.example}
 Let $f(A) = A^{-1}$ where $A$ is a square invertible matrix. Compute $df = d(A^{-1})$.
 :::
 
@@ -516,7 +536,7 @@ $m\times m$ matrices:
 
 - $f(A)=A^{-1}$, which gives $df=f'(A)[dA]=-A^{-1}\,dA\,A^{-1}$
 
-::: example
+::: {.example}
 An even simpler example is the *matrix-square*
 function:
 
@@ -566,7 +586,7 @@ for the simple case of $2\times2$ matrices, which are described by
 only four scalars, so that we can look at every term in the derivative
 explicitly. In particular,
 
-::: example
+::: {.example}
 For a $2\times2$ matrix
 $$A=\begin{pmatrix}p & r\\
 q & s
@@ -699,7 +719,7 @@ $\tilde{f}$ is defined by
 $$\tilde{f}(\operatorname{vec}A)=\operatorname{vec}f(A)=\operatorname{vec}(A^{2})\,.$$
 More generally,
 
-::: definition
+::: {.definition}
 The **vectorization** $\operatorname{vec}A\in\mathbb{R}^{mn}$
 of any $m\times n$ matrix $A\in\mathbb{R}^{m\times n}$ is a defined
 by simply **stacking the columns** of $A$, from left to right,
@@ -727,7 +747,7 @@ linear-algebra libraries.
 
 .
 
-::: problem
+::: {.problem}
 The vector $\operatorname{vec}A$ corresponds to the coefficients
 you get when you express the $m\times n$ matrix $A$ in a *basis*
 of matrices. What is that basis?
@@ -754,7 +774,7 @@ of an alternative perspective.
 To understand Jacobians of functions (from matrices to matrices),
 let's begin by considering a basic question:
 
-::: question
+::: {.question}
 What is the
 *size* of the Jacobian of the matrix-square function?
 :::
@@ -890,7 +910,7 @@ products show up in a wide variety of mathematical applications where
 multidimensional data arises, such as multivariate statistics and
 data science or multidimensional scientific/engineering problems.
 
-::: definition
+::: {.definition}
 If $A$ is an $m\times n$ matrix with entries
 $a_{ij}$ and $B$ is a $p\times q$ matrix, then their **Kronecker
 product** $A\otimes B$ is defined by
@@ -962,7 +982,7 @@ first build up some understanding of the algebra of Kronecker products.
 To start with, a good exercise is to convince yourself of a few simpler
 properties of Kronecker products:
 
-::: problem
+::: {.problem}
 From the definition
 of the Kronecker product, derive the following identities:
 
@@ -991,7 +1011,7 @@ of the Kronecker product, derive the following identities:
 In order to convert linear operations like $AX+XA$ into Kronecker
 products via vectorization, the key identity is:
 
-::: proposition
+::: {.proposition}
 []{#prop5000 label="prop5000"} Given (compatibly sized) matrices
 $A,B,C$, we have
 $$(A\otimes B)\operatorname{vec}(C)=\operatorname{vec}(BCA^{T}).$$
@@ -1105,7 +1125,7 @@ r & 0 & p+s & r\\
 which exactly matches our laboriously computed Jacobian $\tilde{f}'$
 from earlier!
 
-::: example
+::: {.example}
 For the matrix-cube function $A^{3}$, where $A$
 is an $m\times m$ square matrix, compute the $m^{2}\times m^{2}$
 Jacobian of the vectorized function $\operatorname{vec}(A^{3})$.
@@ -1199,7 +1219,7 @@ came from dropping higher-order terms from a small but finite difference:
 $$\delta f = f(x+\delta x) - f(x) = f'(x) \delta x + o(\Vert \delta x \Vert) \, .$$
 So, we can just compare the **finite difference** $\boxed{f(x+\delta x) - f(x)}$ to our **(directional) derivative operator** $f'(x) \delta x$ (i.e. the derivative in the direction $\delta x$). $f(x+\delta x) - f(x)$ is also called a **forward difference** approximation. The antonym of a forward difference is a **backward difference** approximation $f(x) - f(x - \delta x) \approx f'(x) \delta x$. If you just want to compute a derivative, there is not much practical distinction between forward and backward differences. The distinction becomes more important when discretizing (approximating) differential equations. We'll look at other possibilities below.
 
-::: remark
+::: {.remark}
 Note that this definition of forward and backward difference is **not** the same as forward- and backward-mode differentiation---these are **unrelated** concepts.
 :::
 
@@ -1223,7 +1243,7 @@ Here, $\lVert \cdot \rVert$ is a [norm](https://en.wikipedia.org/wiki/Norm_(math
 
 So, as above, you can compute that the relative error between the approximation and the exact answer is about $10^{-8}$, where as the relative error between $2A dA$ and the exact answer is about $10^{0}$. This shows that our exact answer is likely correct! Getting a good match up between a random input and small displacement isn't a proof of correctness of course, but it is always a good thing to check. This kind of randomized comparison will almost always **catch major bugs** where you have calculated the symbolic derivative incorrectly, like in our $2A dA$ example.
 
-::: definition
+::: {.definition}
 Note that the norm of a matrix that we are using, computed by `norm(A)` in Julia, is just the direct analogue of the familiar Euclidean norm for the case of vectors. It is simply the square root of the sum of the matrix entries squared:
 $$\lVert A \rVert := \sqrt{\sum_{i,j} |A_{ij}|^2} = \sqrt{\tr (A^T A)} \, .$$
 This is called the [Frobenius norm](https://mathworld.wolfram.com/FrobeniusNorm.html).
@@ -1235,7 +1255,10 @@ Now how accurate is our finite-difference approximation above? How should we cho
 
 Let's again consider the example $f(A) = A^2$, and plot the relative error as a function of $\lVert \delta A \rVert$. This plot will be done *logarithmically* (on a log--log scale) so that we can see power-law relationships as straight lines.
 
-![Forward-difference accuracy for $f(A) = A^2$, showing the relative error in $\delta f = f(A + \delta A) - f(A)$ versus the linearization $f'(A) \delta A$, as a function of the magnitude $\Vert \delta A\Vert$. $A$ is a $4 \times 4$ matrix with unit-variance Gaussian random entries, and $\delta A$ is similarly a unit-variance Gaussian random perturbation scaled by a factor $s$ ranging from $1$ to $10^{-16}$.](figures/fig1.pdf.svg){width="80%"}
+<figure>
+<embed src="figures/fig1.pdf.svg" style="width:80.0%" />
+<figcaption>Forward-difference accuracy for <span class="math inline"><em>f</em>(<em>A</em>) = <em>A</em><sup>2</sup></span>, showing the relative error in <span class="math inline"><em>δ</em><em>f</em> = <em>f</em>(<em>A</em> + <em>δ</em><em>A</em>) − <em>f</em>(<em>A</em>)</span> versus the linearization <span class="math inline"><em>f</em><sup>′</sup>(<em>A</em>)<em>δ</em><em>A</em></span>, as a function of the magnitude <span class="math inline">‖<em>δ</em><em>A</em>‖</span>. <span class="math inline"><em>A</em></span> is a <span class="math inline">4 × 4</span> matrix with unit-variance Gaussian random entries, and <span class="math inline"><em>δ</em><em>A</em></span> is similarly a unit-variance Gaussian random perturbation scaled by a factor <span class="math inline"><em>s</em></span> ranging from <span class="math inline">1</span> to <span class="math inline">10<sup>−16</sup></span>.</figcaption>
+</figure>
 
 We notice two main features as we decrease $\delta A$:
 
@@ -1304,7 +1327,7 @@ Given $x,y \in V$, the inner product $\langle x, y \rangle$ is a map ($\cdot$) s
 
 Note that the combination of the first two properties means that it must also be linear in the left vector (or conjugate-linear, if we were using complex numbers). Another useful consequence of these three properties, which is a bit trickier to derive, is the *Cauchy--Schwarz inequality* $|\langle x, y \rangle| \le \Vert x \Vert \, \Vert y \Vert$.
 
-::: definition
+::: {.definition}
 A (complete) vector space with an inner product is called a *Hilbert space*. (The technical requirement of "completeness" essentially means that you can take limits in the space, and is important for rigorous proofs.[^6])
 :::
 
@@ -1315,11 +1338,11 @@ Note that $\nabla f$ always has the "same shape" as $x$.
 
 The first few examples we look at involve the usual Hilbert space $V = \R^n$ with different inner products.
 
-::: example
+::: {.example}
 Given $V = \R^n$ with $n$-column vectors, we have the familiar Euclidean dot product $\langle x, y \rangle = x^T y$. This leads to the usual $\nabla f$.
 :::
 
-::: example
+::: {.example}
 We can have different inner products on $\R^n$. For instance,
 $$\langle x, y\rangle_W = w_1 x_1 y_1 + w_2 x_2 y_2 + \dots w_n x_n y_n = x^T \underbrace{\begin{pmatrix}
         w_1 & & \\
@@ -1337,14 +1360,14 @@ In these notes, we will employ the Euclidean inner product for $x \in \mathbb{R}
 
 We can also consider the space of $m\times n$ matrices $V = \R^{m \times n}$. There, is of course, a vector-space isomorphism from $V \ni A \to \mathrm{vec}(A) \in \R^{mn}$. Thus, in this space we have the analogue of the familiar ("Frobenius\") Euclidean inner product, which is convenient to rewrite in terms of matrix operations via the trace:
 
-::: definition
+::: {.definition}
 The **Frobenius inner product** of two $m \times n$ matrices $A$ and $B$ is:
 $$\langle A, B \rangle_F = \sum_{ij} A_{ij} B_{ij} = \mathrm{vec}(A)^T \mathrm{vec}(B) = \tr(A^T B) \, .$$
 Given this inner product, we also have the corresponding **Frobenius norm**: $$\lVert A \rVert_F = \sqrt{\langle A,A \rangle_F} = \sqrt{\tr(A^TA)} = \lVert \mathrm{vec} A\rVert = \sqrt{\sum_{i,j} |A_{ij}|^2} \, .$$
 Using this, we can now define the gradient of scalar functions with *matrix inputs*! This will be our default matrix inner product (hence defining our default matrix gradient) in these notes (sometimes dropping the $F$ subscript).
 :::
 
-::: example
+::: {.example}
 Consider the function
 $$f(A) = \lVert A \rVert_F = \sqrt{\tr(A^T A)}.$$ What is $df$?
 :::
@@ -1366,7 +1389,7 @@ Note that one obtains exactly the same result for column vectors $x$, i.e. $\n
 
 Let's consider another simple example:
 
-::: example
+::: {.example}
 Fix some constant $x \in \R^m$, $y\in \R^n$, and consider the function $f:\R^{m\times n} \to \R$ given by
 $$f(A) = x^T A y.$$
 What is $\nabla f$?
@@ -1401,7 +1424,7 @@ Given a vector space $V$, a norm $\lVert \cdot \rVert$ on $V$ is a map $\lVert \
 
 A vector space that has a norm is called an *normed vector space*. Often, mathematicians technically want a slightly more precise type of normed vector space with a less obvious name: a *Banach* space.
 
-::: definition
+::: {.definition}
 A (complete) vector space with a norm is called a *Banach space*. (As with Hilbert spaces, "completeness" is a technical requirement for some types of rigorous analysis, essentially allowing you to take limits.)
 :::
 
@@ -1437,7 +1460,10 @@ Once you are close to the root, Newton's method converges amazingly quickly. As 
 
 One may ask what happens when $f'(x)$ is not invertible, for instance here if $f'(x) = 0$. If this happens, then Newton's method may break down! See [here](https://en.wikipedia.org/wiki/Newton%27s_method#Failure_analysis) for examples of when Newton's method breaks down.
 
-![Single step of the scalar Newton's method to solve $f(x)=0$ for an example nonlinear function $f(x) = 2\cos(x) - x + x^2/10$. Given a starting guess ($x = 2.3$ in this example), we use $f(x)$ and $f'(x)$ to form a linear (affine) approximation of $f$, and then our next step $x_\mathrm{new}$ is the root of this approximation. As long as the initial guess is not too far from the root, Newton's method converges extremely rapidly to the exact root (black dot).](figures/newton-step.pdf.svg){#fig:newton-step width="70%"}
+<figure id="fig:newton-step">
+<embed src="figures/newton-step.pdf.svg" style="width:70.0%" />
+<figcaption>Single step of the scalar Newton’s method to solve <span class="math inline"><em>f</em>(<em>x</em>) = 0</span> for an example nonlinear function <span class="math inline"><em>f</em>(<em>x</em>) = 2cos (<em>x</em>) − <em>x</em> + <em>x</em><sup>2</sup>/10</span>. Given a starting guess (<span class="math inline"><em>x</em> = 2.3</span> in this example), we use <span class="math inline"><em>f</em>(<em>x</em>)</span> and <span class="math inline"><em>f</em><sup>′</sup>(<em>x</em>)</span> to form a linear (affine) approximation of <span class="math inline"><em>f</em></span>, and then our next step <span class="math inline"><em>x</em><sub>new</sub></span> is the root of this approximation. As long as the initial guess is not too far from the root, Newton’s method converges extremely rapidly to the exact root (black dot).</figcaption>
+</figure>
 
 ### Multidimensional Functions
 
@@ -1458,8 +1484,11 @@ That's it! Once we have the Jacobian, we can just solve a linear system on each 
 
 A perhaps even more famous application of large-scale differentiation is to nonlinear optimization. Suppose we have a scalar-valued function $f: \R^n \to \R$, and suppose we want to minimize (or maximize) $f$. For instance, in machine learning, we could have a big neural network (NN) with a vector $x$ of a million parameters, and one tries to minimize a "loss" function $f$ that compares the NN output to the desired results on "training" data. The most basic idea in optimization is to go "downhill" (see diagram) to make $f$ as small as possible. If we can take the gradient of this function $f$, to go "downhill" we consider $- \nabla f$, the direction of *steepest descent*, as depicted in Fig. [5](#fig:steepest-descent){reference-type="ref" reference="fig:steepest-descent"}.
 
-![
-A *steepest-descent algorithm* minimizes a function $f(x)$ by taking successive "downhill" steps in the direction $-\nabla f$. (In the example shown here, we are minimizing a quadratic function in two dimensions $x \in \mathbb{R}^2$, performing an exact 1d minimization in the downhill direction for each step.) Steepest-descent algorithms can sometimes "zig-zag" along narrow valleys, slowing convergence (which can be counteracted in more sophisticated algorithms by "momentum" terms, second-derivative information, and so on).](figures/steepest-descent.pdf.svg){#fig:steepest-descent width="70%"}
+<figure id="fig:steepest-descent">
+<embed src="figures/steepest-descent.pdf.svg" style="width:70.0%" />
+<figcaption>
+A <em>steepest-descent algorithm</em> minimizes a function <span class="math inline"><em>f</em>(<em>x</em>)</span> by taking successive “downhill” steps in the direction <span class="math inline">−∇<em>f</em></span>. (In the example shown here, we are minimizing a quadratic function in two dimensions <span class="math inline"><em>x</em> ∈ ℝ<sup>2</sup></span>, performing an exact 1d minimization in the downhill direction for each step.) Steepest-descent algorithms can sometimes “zig-zag” along narrow valleys, slowing convergence (which can be counteracted in more sophisticated algorithms by “momentum” terms, second-derivative information, and so on).</figcaption>
+</figure>
 
 Then, even if we have a million parameters, we can evolve all of them simultaneously in the downhill direction. It turns out that calculating all million derivatives costs about the same as evaluating the function at a point once (using reverse-mode/adjoint/left-to-right/backpropagation methods). Ultimately, this makes large-scale optimization practical for training neural nets, optimizing shapes of airplane wings, optimizing portfolios, etc.
 
@@ -1552,7 +1581,7 @@ In practice, however, it is often helpful to understand adjoint methods even if 
 
 To finish off this section of the notes, we conclude with an example of how to use this "adjoint method" to compute a derivative efficiently. Before working through the example, we first state the problem and highly recommend trying it out before reading the solution.
 
-::: problem
+::: {.problem}
 []{#PSETexample label="PSETexample"}
 Suppose that $A(p)$ takes a vector $p\in\mathbb{R}^{n-1}$ and returns
 the $n\times n$ tridiagonal real-symmetric matrix
@@ -1618,7 +1647,7 @@ where we have simplified the result in terms of $x$ and $v$ for the next part.
 
 This section of notes follows [this](https://rawcdn.githack.com/mitmath/matrixcalc/b08435612045b17745707f03900e4e4187a6f489/notes/determinant_and_inverse.html) Julia notebook. This notebook is a little bit short, but is an important and useful calculation.
 
-::: theorem
+::: {.theorem}
 Given $A$ is a square matrix, we have
 $$\nabla (\det A) = \mathrm{cofactor}(A) = (\det A)A^{-T} := \operatorname{adj}(A^T) = \operatorname{adj}(A)^T$$
 where $\operatorname{adj}$ is the "adjugate". (You may not have heard of the matrix adjugate, but this formula tells us that it is simply $\operatorname{adj}(A) = \det(A) A^{-1}$, or $\mathrm{cofactor}(A) = \operatorname{adj}(A^T)$.) Furthermore,
@@ -1702,15 +1731,15 @@ In practice, however, you will probably find that the operator expression $- A^{
 
 The first time that Professor Edelman had heard about automatic differentiation (AD), it was easy for him to imagine what it was ...but what he imagined was wrong! In his head, he thought it was straightforward symbolic differentiation applied to code---sort of like executing Mathematica or Maple, or even just automatically doing what he learned to do in his calculus class. For instance, just plugging in functions and their domains from something like the following first-year calculus table:
 
-::: center
-  Derivative                      Domain
-  ------------------------------- ------------------------------------------
-  $(\sin x)' = \cos x$            $- \infty< x < \infty$
-  $(\cos x)' = - \sin x$          $-\infty< x < \infty$
-  $(\tan x)' = \sec^2 x$          $x\neq \frac{\pi}{2} + \pi n, n \in \ZZ$
-  $(\cot x)' = - \csc^2 x$        $x\neq \pi n, n \in \ZZ$
-  $(\sec x)' = \tan x \sec x$     $x \neq \frac{\pi}{2} + \pi n, n\in \ZZ$
-  $(\csc x)' = - \cot x \csc x$   $x\neq \pi n, n \in \ZZ$
+::: {.center}
+| Derivative                    | Domain                                   |
+|:------------------------------|:-----------------------------------------|
+| $(\sin x)' = \cos x$          | $- \infty< x < \infty$                   |
+| $(\cos x)' = - \sin x$        | $-\infty< x < \infty$                    |
+| $(\tan x)' = \sec^2 x$        | $x\neq \frac{\pi}{2} + \pi n, n \in \ZZ$ |
+| $(\cot x)' = - \csc^2 x$      | $x\neq \pi n, n \in \ZZ$                 |
+| $(\sec x)' = \tan x \sec x$   | $x \neq \frac{\pi}{2} + \pi n, n\in \ZZ$ |
+| $(\csc x)' = - \cot x \csc x$ | $x\neq \pi n, n \in \ZZ$                 |
 :::
 
 And in any case, if it wasn't just like executing Mathematica or Maple, then it must be finite differences, like one learns in a numerical computing class (or as we did in Sec. [4](#sec:finitedifference){reference-type="ref" reference="sec:finitedifference"}).
@@ -1923,7 +1952,7 @@ we would have gotten if we had.
 
 Let's now get into automatic differentiation via computational graphs. For this section, we consider the following simple motivating example.
 
-::: example
+::: {.example}
 []{#ex:compute-graph label="ex:compute-graph"}
 Define the following functions:
 $$\begin{cases}
@@ -2089,7 +2118,7 @@ Since the Hessian matrix is symmetric (as discussed in great generality by Sec.�
 
 **Scalar-valued functions of gradients:** There is another common circumstance in which one often combines forward and reverse differentiation, but which can appear somewhat more subtle, and that is in differentiating a scalar-valued function of a gradient of another scalar-valued function. Consider the following example:
 
-::: example
+::: {.example}
 Let $f(x): \mathbb{R}^n \mapsto \mathbb{R}$ be a scalar-valued function of $n \gg 1$ inputs with gradient $\left. \nabla f \right|_{x} = f'(x)^T$, and let $g(z): \mathbb{R}^n \mapsto \mathbb{R}$ be another such function with gradient $\left. \nabla g \right|_{z} = g'(z)^T$. Now, consider the scalar-valued function $h(x) = g(\left. \nabla f \right|_{x}): \mathbb{R}^n \mapsto \mathbb{R}$ and compute $\left. \nabla h \right|_{x} = h'(x)^T$.
 
 Denote $z = \left. \nabla f \right|_{x}$. By the chain rule, $h'(x) = g'(z)(\nabla f)'(x)$, but we want to avoid explicitly computing the large $n \times n$ Hessian matrix $(\nabla f)'$. Instead, as discussed above, we use the fact that such a vector--Hessian product is equivalent (by symmetry of the Hessian) to the transpose of a Hessian--vector product multiplying the Hessian $(\nabla f)'$ with the vector $\nabla g = g'(z)^T$, which is equivalent to a directional derivative:
@@ -2152,7 +2181,7 @@ julia> h(x+δx) - h(x)  # finite-difference check
 
 The finite-difference check matches to about 7 significant digits, which is as much as we can hope for---the forward-over-reverse code works!
 
-::: problem
+::: {.problem}
 A common variation on the above procedure, which often appears in machine learning, involves a function $f(x,p) \in \mathbb{R}$ that maps input "data" $x \in \mathbb{R}^n$ and "parameters" $p \in \mathbb{R}^N$ to a scalar. Let $\nabla_x f$ and $\nabla_p f$ denote the gradients with respect to $x$ and $p$.
 
 Now, suppose we have a function $g(z): \mathbb{R}^n \mapsto \mathbb{R}$ as before, and define $h(x,p) = g(\left. \nabla_x f \right|_{x,p})$. We want to compute $\nabla_p h = (\partial h / \partial p)^T$, which will involve "mixed" derivatives of $f$ with respect to *both* $x$ and $p$.
@@ -2244,7 +2273,10 @@ Relying on a computer to obtain numerical solutions to ODEs is practically essen
 
 ## Sensitivity analysis of ODE solutions {#sec:ODE-sensitivity}
 
-![If we have an ordinary differential equation (ODE) $\frac{\partial u}{\partial t} = f(u, p, t)$ whose solution $u(p, t)$ depends on parameters $p$, we would like to know the change $d u = u(p + d p, t) - u(p, t)$ in the solution due to changes in $p$. Here, we show a simple example $\frac{\partial u}{\partial t} = -pu$, whose solution $u(p,t) = e^{-p t} u(p,0)$ is known analytically, and show the change $\delta u$ from changing $p=1$ to by $\delta p = 0.1$.](figures/ode-fig.pdf.svg){#fig:ode width="60%"}
+<figure id="fig:ode">
+<embed src="figures/ode-fig.pdf.svg" style="width:60.0%" />
+<figcaption>If we have an ordinary differential equation (ODE) <span class="math inline">$\frac{\partial u}{\partial t} = f(u, p, t)$</span> whose solution <span class="math inline"><em>u</em>(<em>p</em>, <em>t</em>)</span> depends on parameters <span class="math inline"><em>p</em></span>, we would like to know the change <span class="math inline"><em>d</em><em>u</em> = <em>u</em>(<em>p</em> + <em>d</em><em>p</em>, <em>t</em>) − <em>u</em>(<em>p</em>, <em>t</em>)</span> in the solution due to changes in <span class="math inline"><em>p</em></span>. Here, we show a simple example <span class="math inline">$\frac{\partial u}{\partial t} = -pu$</span>, whose solution <span class="math inline"><em>u</em>(<em>p</em>, <em>t</em>) = <em>e</em><sup>−<em>p</em><em>t</em></sup><em>u</em>(<em>p</em>, 0)</span> is known analytically, and show the change <span class="math inline"><em>δ</em><em>u</em></span> from changing <span class="math inline"><em>p</em> = 1</span> to by <span class="math inline"><em>δ</em><em>p</em> = 0.1</span>.</figcaption>
+</figure>
 
 Often, ODEs depend on some additional parameters $p\in\mathbb{R}^{N}$
 (or some other vector space). For example, these might be reaction-rate
@@ -2586,7 +2618,7 @@ v\,dt\:.$$
 
 Another useful exercise is to consider a $G$ that takes the form of a summation:
 
-::: problem
+::: {.problem}
 []{#prob:discrete-data label="prob:discrete-data"}
 Suppose that $G(p)$ takes the form of a sum of $K$ terms:
 $$G(p) = \sum_{k=1}^{K} g_k(p,u(p,t_k))$$
@@ -2622,7 +2654,7 @@ In this lecture, we will apply our derivative machinery to a new type of input: 
 
 ## Functionals: Mapping functions to scalars
 
-::: example
+::: {.example}
 For example, consider functions $u(x)$ that map $x\in [0,1] \to u(x) \in \R$. We may then define the function $f$:
 $$f(u) = \int_0^1 \sin (u(x)) \,\mathrm{d} x.$$
 Such a function, mapping an input *function* $u$ to an output *number*, is sometimes called a "functional." What is $f'$ or $\nabla f$ in this case?
@@ -2639,7 +2671,10 @@ $$\begin{aligned}
 \end{aligned}$$
 where in the last step we took $du(x)$ to be arbitrarily small[^15] so that we could linearize $\sin(u + du)$ to first-order in $du(x)$. That's it, we have our derivative $f'(u)$ as a perfectly good linear operation acting on $du$!
 
-![If our $f(u)$'s inputs $u$ are *functions* $u(x)$ (e.g., mapping $[0,1] \mapsto \mathbb{R}$), then the essence of differentiation is linearizing $f$ for small perturbations $\delta u(x)$ that are themselves functions, in the limit where $\delta u(x)$ becomes arbitrarily small. Here, we show an example of a $u(x)$ and a perturbation $u(x)+\delta u(x)$.](figures/du.pdf.svg){#fig:du width="60%"}
+<figure id="fig:du">
+<embed src="figures/du.pdf.svg" style="width:60.0%" />
+<figcaption>If our <span class="math inline"><em>f</em>(<em>u</em>)</span>’s inputs <span class="math inline"><em>u</em></span> are <em>functions</em> <span class="math inline"><em>u</em>(<em>x</em>)</span> (e.g., mapping <span class="math inline">[0, 1] ↦ ℝ</span>), then the essence of differentiation is linearizing <span class="math inline"><em>f</em></span> for small perturbations <span class="math inline"><em>δ</em><em>u</em>(<em>x</em>)</span> that are themselves functions, in the limit where <span class="math inline"><em>δ</em><em>u</em>(<em>x</em>)</span> becomes arbitrarily small. Here, we show an example of a <span class="math inline"><em>u</em>(<em>x</em>)</span> and a perturbation <span class="math inline"><em>u</em>(<em>x</em>) + <em>δ</em><em>u</em>(<em>x</em>)</span>.</figcaption>
+</figure>
 
 ## Inner products of functions
 
@@ -2655,7 +2690,7 @@ The two infinitesimals $du$ and $dx$ may seem a bit disconcerting, but if this i
 
 The gradient $\nabla f$ is just another function, $\cos(u(x))$! As usual, $\nabla f$ has the same "shape" as $u$.
 
-::: remark
+::: {.remark}
 It might be instructive here to compare the gradient of an integral, above, with a discretized version where the integral is replaced by a sum. If we have
 $$f(u) = \sum_{k=1}^n \sin(u_k) \Delta x \,$$
 where $\Delta x = 1/n$,
@@ -2669,7 +2704,7 @@ $\langle u, v \rangle = \sum_{k=1}^n u_k v_k \Delta x$, then, according to Sec.�
 
 We now consider a more tricky example with an intuitive geometric interpretation.
 
-::: example
+::: {.example}
 Let $u$ be a differentiable function on $[0,1]$ and consider the functional
 $$f(u) = \int_0^1 \sqrt{1+ u'(x)^2}\,dx.$$
 Solve for $\nabla f$ when $u(0) = u(1) = 0.$
@@ -2702,7 +2737,7 @@ Hence, $\nabla f = 0 \implies u''(x) = 0 \implies u(x) = ax + b$ for constants $
 
 Thus, we have recovered the familiar result that straight line segments in $\R^2$ are the shortest curves between two points!
 
-::: remark
+::: {.remark}
 Notice that the expression $\frac{u''}{(1+ u'^2)^{3/2}}$ is the formula from multivariable calculus for the curvature of the curve defined by $y= u(x)$. It is not a coincidence that the gradient of arc length is the (negative) curvature, and the minimum arc length occurs for zero gradient = zero curvature.
 :::
 
@@ -2710,7 +2745,7 @@ Notice that the expression $\frac{u''}{(1+ u'^2)^{3/2}}$ is the formula from mul
 
 This style of calculation is part of the subject known as the **calculus of variations**. Of course, the final answer in the example above (a straight line) may have been obvious, but a similar approach can be applied to many more interesting problems. We can generalize the approach as follows:
 
-::: example
+::: {.example}
 Let $f(u) = \int_a^b F(u, u', x) \, dx$ where $u$ is a differentiable function on $[a,b]$. Suppose the endpoints of $u$ are fixed (i.e. its values at $x=a$ and $x=b$ are constants). Let us calculate $df$ and $\nabla f$.
 :::
 
@@ -2725,7 +2760,7 @@ Hence,
 $$\nabla f = \frac{\partial F}{\partial u} - \left(\frac{\partial F}{\partial u'}\right)',$$
 which equals zero at extremum. Notice that $\nabla f = 0$ yields a second-order differential equation in $u$, known as the [Euler--Lagrange equations](https://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation)!
 
-::: remark
+::: {.remark}
 The notation $\partial F / \partial u'$ is a notoriously confusing aspect of the calculus of variations---what does it mean to take the derivative "with respect to $u'$" while holding $u$ fixed? A more explicit, albeit more verbose, way of expressing this is to think of $F(u,v,x)$ as a function of three *unrelated* arguments, for which we only substitute $v=u'$ *after* differentiating with respect to the second argument $v$:
 $$\frac{\partial F}{\partial u'} = \left. \frac{\partial F}{\partial v} \right|_{v=u'} \, .$$
 :::
@@ -2745,7 +2780,7 @@ where $A$ is a matrix.
 To differentiate this function, we had to go back to the drawing board, and
 ask:
 
-::: question
+::: {.question}
 If we perturb the input slightly, how does the output change?
 []{#question:perturb label="question:perturb"}
 :::
@@ -2755,7 +2790,7 @@ $$\delta f = (A+\delta A)^2 - A^2 = A (\delta A) + (\delta A) A + \underbrace{(\
 We called $\delta f$ and $\delta A$ *differentials* in the limit where $\delta A$ became arbitrarily small.
 We then had to ask:
 
-::: question
+::: {.question}
 What terms in the differential can we neglect?
 []{#question:neglect label="question:neglect"}
 :::
@@ -2813,7 +2848,7 @@ i.e. values that can be expressed using *averages*. Even if a function is stoch
 
 So, why not take the average *first*, and then take the ordinary derivative of this average? This simple approach works for very basic stochastic functions (e.g. the exponential distribution above has expected value $p$, with derivative $1$), but runs into practical difficulties for more complicated distributions (as are commonly implemented by large computer programs working with random numbers).
 
-::: remark
+::: {.remark}
 It is often much easier to produce an "unbiased estimate" $X(p)$ of a statistical quantity than to compute it exactly. (Here, an unbiased estimate means that $X(p)$ averages out to our statistical quantity of interest.)
 :::
 
@@ -2928,9 +2963,12 @@ julia> sample_X2(10.0)
 
 Okay, so what does our joint distribution look like?
 
-![For $X(p) \sim \operatorname{Exp}(p)$ parameterized via the inversion method, we can write $X(p)$, $X(p+\delta p)$, and
-$\delta X(p)$ as functions from $\Omega = [0,1] \to \mathbb{R}$, defined on a probability space with
-$\mathbb{P} = \operatorname{Unif}(0,1)$.](figures/exp_for_matrixcalc.pdf.svg){#fig:exp width="40%"}
+<figure id="fig:exp">
+<embed src="figures/exp_for_matrixcalc.pdf.svg" style="width:40.0%" />
+<figcaption>For <span class="math inline"><em>X</em>(<em>p</em>) ∼ Exp (<em>p</em>)</span> parameterized via the inversion method, we can write <span class="math inline"><em>X</em>(<em>p</em>)</span>, <span class="math inline"><em>X</em>(<em>p</em> + <em>δ</em><em>p</em>)</span>, and
+<span class="math inline"><em>δ</em><em>X</em>(<em>p</em>)</span> as functions from <span class="math inline"><em>Ω</em> = [0, 1] → ℝ</span>, defined on a probability space with
+<span class="math inline">ℙ = Unif (0, 1)</span>.</figcaption>
+</figure>
 
 As shown in Figure [8](#fig:exp){reference-type="ref" reference="fig:exp"}, we can plot $X(p)$ and $X(p+\delta p)$ as functions over $\Omega$.
 To sample the two of them jointly, we use the *same* choice of $\omega$:
@@ -3118,7 +3156,7 @@ This matrix, denoted here by $H$, is known as the **Hessian** of $f$, which has 
 $$H_{i,j} = \frac{\partial^2 f}{ \partial x_j \partial x_i} = \frac{\partial^2 f}{ \partial x_i \partial x_j} = H_{j,i}  \, .$$
 The fact that you can take partial derivatives in either order is a familiar fact from multivariable calculus (sometimes called the "symmetry of mixed derivatives" or "equality of mixed partials"), and means that the Hessian is a *symmetric matrix* $H = H^T$. (We will later see that such symmetries arise very generally from the construction of second derivatives.)
 
-::: example
+::: {.example}
 For $x \in \mathbb{R}^2$ and the function $f(x) = \sin(x_1) + x_1^2 x_2^3$, its gradient is
 $$\nabla f = \begin{pmatrix} \cos(x_1) + 2x_1 x_2^3 \\
 3 x_1^2 x_2^2
@@ -3138,7 +3176,7 @@ where both $\nabla f$ and $H$ are evaluated at $x$, and we have switched from an
 $$dx^T H dx' = f(x + dx + dx') + f(x) - f(x + dx) - f(x + dx') = f''(x)[dx,dx'] \,$$
 where $dx$ and $dx'$ are two independent "infinitesimal" directions and we have dropped terms of higher than second order. This formula is very suggestive, because it uses $H$ to map *two* vectors into a *scalar*, which we will generalize below into the idea of a **bilinear map** $f''(x)[dx,dx']$. This formula is also obviously symmetric with respect to interchange of $dx$ and $dx'$ --- $f''(x)[dx,dx'] = f''(x)[dx',dx]$ --- which will lead us once again to the symmetry $H=H^T$ below.
 
-::: remark
+::: {.remark}
 Consider the Hessian matrix versus other Jacobian matrices. The Hessian matrix expresses the *second* derivative of a scalar-valued multivariate function, and is always square and symmetric. A Jacobian matrix, in general, expresses the *first* derivative of a vector-valued multivariate function, may be non-square, and is rarely symmetric. (However, the Hessian matrix *is* the Jacobian of the $\nabla f$ function!)
 :::
 
@@ -3152,7 +3190,7 @@ $$d f' = f'(x + dx') - f'(x) = f''(x) [dx'].$$
 (Notation: $dx'$ is not some kind of derivative of $dx$; the prime simply denotes a *different*
 arbitrary small change in $x$.) What kind of "thing" is $df'$? Let's consider a simple concrete example:
 
-::: example
+::: {.example}
 Consider the following function $f(x): \mathbb{R}^2 \mapsto \mathbb{R}^2$ mapping two-component vectors $x \in \mathbb{R}^2$ to two-component vectors $f(x) \in \mathbb{R}^2$:
 $$f(x) = \begin{pmatrix} x_1^2 \sin(x_2) \\ 5x_1 - x_2^3
 \end{pmatrix} \, .$$
@@ -3192,7 +3230,7 @@ where we combine the two brackets for brevity. This final result $f''(x) [dx', d
 
 More precisely, we have the following.
 
-::: definition
+::: {.definition}
 Let $U,V,W$ be a vector spaces, not necessarily the same. Then, a **bilinear map** is a function $B:U\times V \to W$, mapping a $u \in U$ and $v \in V$ to $B[u,v] \in W$, such that we have linearity in both arguments:
 $$\begin{cases}
         B[u, \alpha v_1 + \beta v_2] = \alpha B[u,v_1] + \beta B[u,v_2] \\
@@ -3232,7 +3270,7 @@ from <span class="math inline"><em>x</em></span> to point A. <span id="fig:seco
 </figcaption>
 </figure>
 
-::: example
+::: {.example}
 Let's review the familiar example from multivariable calculus, $f: \R^n \to \R$. That is, $f(x)$ is a scalar-valued function of a column vector $x\in \R^n$. What is $f''$?
 :::
 
@@ -3255,7 +3293,7 @@ This implies that $H = H^T$: the Hessian matrix is symmetric. As discussed in Se
 
 As an example, let's consider a special case of the general formula above:
 
-::: example
+::: {.example}
 Let $f(x) = x^T A x$ for $x \in \R^n$ and $A$ an $n \times n$ matrix. As above, $f(x) \in \R$ (scalar outputs). Compute $f''$.
 :::
 
@@ -3271,7 +3309,7 @@ $$\begin{aligned}
 \end{aligned}$$
 which will turn out to be a special case of the quadratic approximations of Sec. [12.3](#sec:Hessian-quadratic){reference-type="ref" reference="sec:Hessian-quadratic"} (exact in this example since $f(x)=x^T A x$ is quadratic to start with).
 
-::: example
+::: {.example}
 Let $f(A) = \det A$ for $A$ an $n\times n$ matrix. Express $f''(A)$ as a rule for $f''(A)[dA,dA']$ in terms of $dA$ and $dA'$.
 :::
 
@@ -3374,7 +3412,10 @@ Geometrically, we know that velocity vectors (equivalently, tangents) on the sph
 $$2x^T dx = d(x^T x) = d(1) = 0.$$
 In other words, at the point $x$ on the sphere (a radius, if you will), $dx$, the linearization of the constraint of moving along the sphere satisfies $dx \perp x$. This is our first example where we have seen the infinitesimal perturbation $dx$ being constrained. See Figure [13](#fig:tangentcircle){reference-type="ref" reference="fig:tangentcircle"}.
 
-![Differentials on a sphere ($x^T x = 1$): the differential $dx$ is constrained to be perpendicular to $x$.](figures/tangent_to_radius.pdf.svg){#fig:tangentcircle width="30%"}
+<figure id="fig:tangentcircle">
+<embed src="figures/tangent_to_radius.pdf.svg" style="width:30.0%" />
+<figcaption>Differentials on a sphere (<span class="math inline"><em>x</em><sup><em>T</em></sup><em>x</em> = 1</span>): the differential <span class="math inline"><em>d</em><em>x</em></span> is constrained to be perpendicular to <span class="math inline"><em>x</em></span>.</figcaption>
+</figure>
 
 ### Special Case: A Circle
 
@@ -3395,7 +3436,7 @@ In other words, $(I - x x^T)A x$ is the gradient of $\frac{1}{2} x^T A x$ *on th
 
 So what did we just do? To obtain the gradient on the sphere, we needed (i) a linearization of the function that is correct on tangents, and (ii) a direction that *is* tangent (i.e. satisfies the linearized constraint). Using this, we obtain the gradient of a general scalar function on the sphere:
 
-::: theorem
+::: {.theorem}
 Given $f: \mathbb{S}^n \to \R$, we have
 $$df = g(x)^T dx = (( I - x x^T) g(x))^T dx.$$
 :::
@@ -3406,17 +3447,17 @@ The proof of this is precisely the same as we did before for $f(x) = \frac{1}{2}
 
 Let $Q$ be an orthogonal matrix. Then, computationally (as is done in the Julia notebook), one can see that $Q^T dQ$ is an anti-symmetric matrix (sometimes called skew-symmetric).
 
-::: definition
+::: {.definition}
 A matrix $M$ is anti-symmetric if $M = - M^T$. Note that all anti-symmetric matrices thus have zeroes on their diagonals.
 :::
 
 In fact, we can prove that $Q^T dQ$ is anti-symmetric.
 
-::: theorem
+::: {.theorem}
 Given $Q$ is an orthogonal matrix, we have that $Q^T dQ$ is anti-symmetric.
 :::
 
-::: proof
+::: {.proof}
 *Proof.* The constraint of being orthogonal implies that $Q^T Q = I$. Differentiating this equation, we obtain
 $$Q^T dQ + dQ^T \, Q = 0 \implies Q^T dQ = - (Q^T dQ)^T.$$
 This is precisely the definition of being anti-symmetric. ◻
