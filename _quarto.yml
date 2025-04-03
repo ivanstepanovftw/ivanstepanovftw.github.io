@@ -6,4 +6,8 @@ project:
 format:
   html:
     toc: true
-    html-math-method: mathml
+#    html-math-method: mathml
+    html-math-method: webtex
+#    html-math-method: gladtex
+    link-external-icon: true
+    link-external-newwindow: true

@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Главная
-markdown: kramdown
-math: true
 ---
+
+- [Matrix Calculus](./matrix-calculus/en-US/)
 
 # Добро пожаловать !!!!!!!!!!!!!!!
 
@@ -11,6 +11,23 @@ math: true
 
 $y=wx+b$
 
+## 4
+$$
+y=wx+b
+$$
+
+## 3
+$$y=wx+b$$
+
+## 2
+$$y=wx+b
+$$
+
+## 1
+$$
+y=wx+b$$
+
+## 0
 $$
 A = \begin{bmatrix}
 a_{11} & a_{12} & a_{13} \\
