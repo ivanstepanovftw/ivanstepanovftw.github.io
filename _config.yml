@@ -1,11 +1,23 @@
+title: My Site
+theme: jekyll-theme-cayman
 markdown: kramdown
+
 kramdown:
+  input: GFM
+#  math_engine: katex
+#  syntax_highlighter: rouge
   math_engine: mathjax
+  math_engine_opts:
+    output: svg
+    preview: false
+
 plugins:
   - jekyll-relative-links
+
 relative_links:
   enabled: true
   collections: true
+
 include:
   - CONTRIBUTING.md
   - README.md
@@ -15,4 +27,8 @@ include:
   - CONTRIBUTING.md
   - ISSUE_TEMPLATE.md
   - PULL_REQUEST_TEMPLATE.md
-theme: jekyll-theme-cayman
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
