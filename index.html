@@ -20,6 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { line-height: 1.25; }
@@ -100,38 +101,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  </head><body>true
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
+</head>
 
-
-
-
+<body>
 
 <div id="quarto-search-results"></div>
 <!-- content -->
@@ -145,6 +118,11 @@ window.Quarto = {
   <ul>
   <li><a href="#добро-пожаловать" id="toc-добро-пожаловать" class="nav-link active" data-scroll-target="#добро-пожаловать">Добро пожаловать !!!!!!!!!!!!!!!</a>
   <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">4</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">3</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">2</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">1</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0</a></li>
   <li><a href="#введение" id="toc-введение" class="nav-link" data-scroll-target="#введение">Введение</a></li>
   </ul></li>
   <li><a href="#default" id="toc-default" class="nav-link" data-scroll-target="#default"><code>default</code></a></li>
@@ -178,17 +156,40 @@ window.Quarto = {
 </header>
 
 
+<ul>
+<li><a href="./matrix-calculus/en-US/">Matrix Calculus</a></li>
+</ul>
 <section id="добро-пожаловать" class="level1">
 <h1>Добро пожаловать !!!!!!!!!!!!!!!</h1>
 <p>Это мой сайт, написанный в Markdown.</p>
-<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>w</mi><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">y=wx+b</annotation></semantics></math></p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>11</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>12</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>13</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>21</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>22</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>23</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>31</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>32</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>a</mi><mn>33</mn></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
-A = \begin{bmatrix}
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math inline"></p>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">4</h2>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">3</h2>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">2</h2>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">1</h2>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">0</h2>
+<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20A%20%3D%20%5Cbegin%7Bbmatrix%7D%0Aa_%7B11%7D%20%26%20a_%7B12%7D%20%26%20a_%7B13%7D%20%5C%5C%0Aa_%7B21%7D%20%26%20a_%7B22%7D%20%26%20a_%7B23%7D%20%5C%5C%0Aa_%7B31%7D%20%26%20a_%7B32%7D%20%26%20a_%7B33%7D%0A%5Cend%7Bbmatrix%7D" alt="A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; a_{13} \\
 a_{21} &amp; a_{22} &amp; a_{23} \\
 a_{31} &amp; a_{32} &amp; a_{33}
-\end{bmatrix}
-</annotation></semantics></math></p>
+\end{bmatrix}" title="A = \begin{bmatrix}
+a_{11} &amp; a_{12} &amp; a_{13} \\
+a_{21} &amp; a_{22} &amp; a_{23} \\
+a_{31} &amp; a_{32} &amp; a_{33}
+\end{bmatrix}" class="math display"></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"a"</span><span class="fu">:</span> <span class="st">"b"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="er">//</span> <span class="er">comment</span></span>
@@ -198,6 +199,7 @@ a_{31} &amp; a_{32} &amp; a_{33}
 <!-- 2222222 -->
 <!-- comment -->
 <!-- comment -->
+</section>
 <section id="введение" class="level2">
 <h2 class="anchored" data-anchor-id="введение">Введение</h2>
 <!-- Original: Transformers use a Feed-forward network (FFN) after self-attention. -->
@@ -207,13 +209,13 @@ a_{31} &amp; a_{32} &amp; a_{33}
 <section id="default" class="level1">
 <h1><code>default</code></h1>
 <div class="theorem">
-<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A,B</annotation></semantics></math> be two matrices. Then, we have the differential product rule for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">AB</annotation></semantics></math>: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>B</mi><mo>+</mo><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">d(AB) = (dA)B + A(dB).</annotation></semantics></math> By the differential of the matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, we think of it as a small (unconstrained) change in the matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">A.</annotation></semantics></math> Later, constraints may be places on the allowed perturbations.</p>
+<p>Let <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A%2CB" alt="A,B" title="A,B" class="math inline"> be two matrices. Then, we have the differential product rule for <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20AB" alt="AB" title="AB" class="math inline">: <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20d%28AB%29%20%3D%20%28dA%29B%20%2B%20A%28dB%29." alt="d(AB) = (dA)B + A(dB)." title="d(AB) = (dA)B + A(dB)." class="math display"> By the differential of the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A" alt="A" title="A" class="math inline">, we think of it as a small (unconstrained) change in the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A." alt="A." title="A." class="math inline"> Later, constraints may be places on the allowed perturbations.</p>
 </div>
 </section>
 <section id="t-markdown_mmd---mathjax" class="level1">
 <h1><code>-t markdown_mmd --mathjax</code></h1>
 <div class="theorem" data-markdown="1">
-<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A,B</annotation></semantics></math> be two matrices. Then, we have the differential product rule for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">AB</annotation></semantics></math>: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>A</mi><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>B</mi><mo>+</mo><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mi>B</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">d(AB) = (dA)B + A(dB).</annotation></semantics></math> By the differential of the matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>, we think of it as a small (unconstrained) change in the matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">A.</annotation></semantics></math> Later, constraints may be places on the allowed perturbations.</p>
+<p>Let <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A%2CB" alt="A,B" title="A,B" class="math inline"> be two matrices. Then, we have the differential product rule for <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20AB" alt="AB" title="AB" class="math inline">: <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20d%28AB%29%20%3D%20%28dA%29B%20%2B%20A%28dB%29." alt="d(AB) = (dA)B + A(dB)." title="d(AB) = (dA)B + A(dB)." class="math display"> By the differential of the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A" alt="A" title="A" class="math inline">, we think of it as a small (unconstrained) change in the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A." alt="A." title="A." class="math inline"> Later, constraints may be places on the allowed perturbations.</p>
 </div>
 </section>
 <section id="fill-black-html" class="level1">
@@ -245,7 +247,6 @@ a_{31} &amp; a_{32} &amp; a_{33}
 <figcaption>svg</figcaption>
 </figure>
 </div>
-
 
 
 </section>
@@ -355,6 +356,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
