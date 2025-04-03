@@ -20,7 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { line-height: 1.25; }
@@ -162,37 +161,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="добро-пожаловать" class="level1">
 <h1>Добро пожаловать !!!!!!!!!!!!!!!</h1>
 <p>Это мой сайт, написанный в Markdown.</p>
-<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math inline"></p>
+<p><eq env="math">y=wx+b</eq></p>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section">4</h2>
-<p>asd<img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+<p>asd<eq env="displaymath">y=wx+b</eq></p>
 </section>
 <section id="section-1" class="level2">
 <h2 class="anchored" data-anchor-id="section-1">3</h2>
-<p>asd <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+<p>asd <eq env="displaymath">y=wx+b</eq></p>
 </section>
 <section id="section-2" class="level2">
 <h2 class="anchored" data-anchor-id="section-2">2</h2>
-<p>asd <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"></p>
+<p>asd <eq env="displaymath">y=wx+b
+</eq></p>
 </section>
 <section id="section-3" class="level2">
 <h2 class="anchored" data-anchor-id="section-3">1</h2>
-<p>asd<img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display">asd</p>
-<p>asd <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display">asd</p>
-<p>asd<img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"> asd</p>
-<p>asd <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20y%3Dwx%2Bb" alt="y=wx+b" title="y=wx+b" class="math display"> asd</p>
+<p>asd<eq env="displaymath">y=wx+b</eq>asd</p>
+<p>asd <eq env="displaymath">y=wx+b</eq>asd</p>
+<p>asd<eq env="displaymath">y=wx+b</eq> asd</p>
+<p>asd <eq env="displaymath">y=wx+b</eq> asd</p>
 </section>
 <section id="section-4" class="level2">
 <h2 class="anchored" data-anchor-id="section-4">0</h2>
-<p><img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20A%20%3D%20%5Cbegin%7Bbmatrix%7D%0Aa_%7B11%7D%20%26%20a_%7B12%7D%20%26%20a_%7B13%7D%20%5C%5C%0Aa_%7B21%7D%20%26%20a_%7B22%7D%20%26%20a_%7B23%7D%20%5C%5C%0Aa_%7B31%7D%20%26%20a_%7B32%7D%20%26%20a_%7B33%7D%0A%5Cend%7Bbmatrix%7D" alt="A = \begin{bmatrix}
+<p><eq env="displaymath">
+A = \begin{bmatrix}
 a_{11} &amp; a_{12} &amp; a_{13} \\
 a_{21} &amp; a_{22} &amp; a_{23} \\
 a_{31} &amp; a_{32} &amp; a_{33}
-\end{bmatrix}" title="A = \begin{bmatrix}
-a_{11} &amp; a_{12} &amp; a_{13} \\
-a_{21} &amp; a_{22} &amp; a_{23} \\
-a_{31} &amp; a_{32} &amp; a_{33}
-\end{bmatrix}" class="math display"></p>
+\end{bmatrix}
+</eq></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"a"</span><span class="fu">:</span> <span class="st">"b"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="er">//</span> <span class="er">comment</span></span>
@@ -212,13 +210,13 @@ a_{31} &amp; a_{32} &amp; a_{33}
 <section id="default" class="level1">
 <h1><code>default</code></h1>
 <div class="theorem">
-<p>Let <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A%2CB" alt="A,B" title="A,B" class="math inline"> be two matrices. Then, we have the differential product rule for <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20AB" alt="AB" title="AB" class="math inline">: <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20d%28AB%29%20%3D%20%28dA%29B%20%2B%20A%28dB%29." alt="d(AB) = (dA)B + A(dB)." title="d(AB) = (dA)B + A(dB)." class="math display"> By the differential of the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A" alt="A" title="A" class="math inline">, we think of it as a small (unconstrained) change in the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A." alt="A." title="A." class="math inline"> Later, constraints may be places on the allowed perturbations.</p>
+<p>Let <eq env="math">A,B</eq> be two matrices. Then, we have the differential product rule for <eq env="math">AB</eq>: <eq env="displaymath">d(AB) = (dA)B + A(dB).</eq> By the differential of the matrix <eq env="math">A</eq>, we think of it as a small (unconstrained) change in the matrix <eq env="math">A.</eq> Later, constraints may be places on the allowed perturbations.</p>
 </div>
 </section>
 <section id="t-markdown_mmd---mathjax" class="level1">
 <h1><code>-t markdown_mmd --mathjax</code></h1>
 <div class="theorem" data-markdown="1">
-<p>Let <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A%2CB" alt="A,B" title="A,B" class="math inline"> be two matrices. Then, we have the differential product rule for <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20AB" alt="AB" title="AB" class="math inline">: <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Cdisplaystyle%20d%28AB%29%20%3D%20%28dA%29B%20%2B%20A%28dB%29." alt="d(AB) = (dA)B + A(dB)." title="d(AB) = (dA)B + A(dB)." class="math display"> By the differential of the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A" alt="A" title="A" class="math inline">, we think of it as a small (unconstrained) change in the matrix <img style="vertical-align:middle" src="https://latex.codecogs.com/svg.latex?%5Ctextstyle%20A." alt="A." title="A." class="math inline"> Later, constraints may be places on the allowed perturbations.</p>
+<p>Let <eq env="math">A,B</eq> be two matrices. Then, we have the differential product rule for <eq env="math">AB</eq>: <eq env="displaymath">d(AB) = (dA)B + A(dB).</eq> By the differential of the matrix <eq env="math">A</eq>, we think of it as a small (unconstrained) change in the matrix <eq env="math">A.</eq> Later, constraints may be places on the allowed perturbations.</p>
 </div>
 </section>
 <section id="fill-black-html" class="level1">
