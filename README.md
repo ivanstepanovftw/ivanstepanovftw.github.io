@@ -30,3 +30,11 @@ $$
 $$
 a \equiv b
 $$
+
+$$
+a \implies b
+$$
+
+$$
+a \triangleq b
+$$
