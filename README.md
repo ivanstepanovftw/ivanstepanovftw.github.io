@@ -12,7 +12,21 @@ Specs to comply:
 Tests:
 
 $$
-a
-\coloneqq
-b
+a := b
+$$
+
+$$
+a \colon= b
+$$
+
+$$
+a \coloneqq b
+$$
+
+$$
+a \coloneq b
+$$
+
+$$
+a \equiv b
 $$
