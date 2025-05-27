@@ -38,3 +38,7 @@ $$
 $$
 a \triangleq b
 $$
+
+$$
+a \iff b
+$$
