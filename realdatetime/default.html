@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The REAL Date and Time</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        body {
+            background-color: #11111b;
+            color: #cdd6f4;
+            font-family: 'Roboto+Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #1e1e2e;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid #313244;
+            min-width: 900px;
+            text-align: center;
+        }
+
+        .title {
+            color: #f5c2e7;
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #a6adc8;
+            font-size: 1rem;
+            margin-top: 5px;
+            margin-bottom: 30px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .data-block {
+            width: 45%;
+        }
+        
+        .vertical-separator {
+            width: 1px;
+            height: 200px;
+            background-color: #45475a;
+        }
+
+        .normal-display {
+            font-size: 1.5rem;
+            color: #89b4fa;
+            margin-bottom: 10px;
+            height: 30px;
+        }
+
+        .formula {
+            font-size: 1rem;
+            color: #6c7086;
+            margin-bottom: 15px;
+            height: 20px;
+        }
+
+        .real-value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #a6e3a1;
+            letter-spacing: 2px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">The REAL Date and Time</h1>
+        <p class="subtitle">the government hides from us</p>
+
+        <div class="content-wrapper">
+            <!-- Блок с датой (слева) -->
+            <div class="data-block">
+                <p id="normal-date" class="normal-display"></p>
+                <p id="date-formula" class="formula"></p>
+                <div id="real-date-value" class="real-value"></div>
+            </div>
+
+            <div class="vertical-separator"></div>
+
+            <!-- Блок со временем (справа) -->
+            <div class="data-block">
+                <p id="normal-time" class="normal-display"></p>
+                <p id="time-formula" class="formula"></p>
+                <div id="real-time-value" class="real-value"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const normalDate = document.getElementById('normal-date');
+        const dateFormula = document.getElementById('date-formula');
+        const realDateValue = document.getElementById('real-date-value');
+
+        const normalTime = document.getElementById('normal-time');
+        const timeFormula = document.getElementById('time-formula');
+        const realTimeValue = document.getElementById('real-time-value');
+
+        function padZero(num) {
+            return String(num).padStart(2, '0');
+        }
+        function padMilliseconds(num) {
+            return String(num).padStart(3, '0');
+        }
+
+        function updateClock() {
+            const now = new Date();
+
+            // --- ОБНОВЛЕНИЕ БЛОКА ДАТЫ ---
+            const day = now.getDate();
+            const month = now.getMonth() + 1;
+            const year = now.getFullYear();
+
+            normalDate.textContent = `${padZero(month)}/${padZero(day)}/${year}`;
+            dateFormula.textContent = `(${month} / ${day}) / ${year}`;
+
+            const dateResult = (month / day) / year;
+            realDateValue.textContent = dateResult.toFixed(8);
+
+            // --- ОБНОВЛЕНИЕ БЛОКА ВРЕМЕНИ ---
+            const hours = now.getHours();
+            // const minutes = now.getMinutes();
+            const minutes = 0;
+            const seconds = now.getSeconds();
+            const milliseconds = now.getMilliseconds();
+
+            normalTime.textContent = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}.${padMilliseconds(milliseconds)}`;
+            
+            // ИЗМЕНЕНИЕ 1: Формируем делитель sec.ms для отображения в формуле
+            const divisorForDisplay = `${seconds}.${padMilliseconds(milliseconds)}`;
+            timeFormula.textContent = `(${hours} / ${minutes}) / ${divisorForDisplay}`;
+
+            // ИЗМЕНЕНИЕ 2: Создаем реальное число для вычисления
+            // Например, 15 секунд и 456 мс превратятся в число 15.456
+            const divisorForCalc = seconds + (milliseconds / 1000);
+
+            // Проверяем деление на ноль (минуты или весь делитель sec.ms)
+            if (minutes === 0 || divisorForCalc === 0) {
+                realTimeValue.textContent = '∅';
+            } else {
+                // ИЗМЕНЕНИЕ 3: Выполняем вычисление по новой формуле
+                const timeResult = (hours / minutes) / divisorForCalc;
+                realTimeValue.textContent = timeResult.toFixed(8); // Увеличил точность для наглядности
+            }
+        }
+
+        setInterval(updateClock, 50);
+        updateClock();
+    </script>
+
+</body>
+</html>
