@@ -132,15 +132,15 @@
             const year = now.getFullYear();
 
             normalDate.textContent = `${padZero(month)}/${padZero(day)}/${year}`;
-            dateFormula.textContent = `(${month} / ${day}) / ${year}`;
+            dateFormula.textContent = `(${month} / ${day}) / ${year} =`;
 
             const dateResult = (month / day) / year;
             realDateValue.textContent = dateResult.toFixed(8);
 
             // --- ОБНОВЛЕНИЕ БЛОКА ВРЕМЕНИ ---
             const hours = now.getHours();
-            // const minutes = now.getMinutes();
-            const minutes = 0;
+            const minutes = now.getMinutes();
+            // const minutes = 0;
             const seconds = now.getSeconds();
             const milliseconds = now.getMilliseconds();
 
@@ -148,7 +148,7 @@
             
             // ИЗМЕНЕНИЕ 1: Формируем делитель sec.ms для отображения в формуле
             const divisorForDisplay = `${seconds}.${padMilliseconds(milliseconds)}`;
-            timeFormula.textContent = `(${hours} / ${minutes}) / ${divisorForDisplay}`;
+            timeFormula.textContent = `(${hours} / ${minutes}) / ${divisorForDisplay} =`;
 
             // ИЗМЕНЕНИЕ 2: Создаем реальное число для вычисления
             // Например, 15 секунд и 456 мс превратятся в число 15.456
